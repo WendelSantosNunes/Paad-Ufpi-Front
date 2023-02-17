@@ -48,6 +48,9 @@ export function Footer(){
                    </div>
                 </FooterDiv>
             </div>
+            <div className="footerEnd">
+                <p>© 2023 Pesquisas Avançadas em Análise de Dados (PAAD)</p>
+            </div>
         </FooterContainer>
     )
 }

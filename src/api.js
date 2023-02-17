@@ -28,3 +28,45 @@ export function USER_GET(token) {
         }
     }
 }
+
+export function PASSWORD_LOST(body) {
+    return{ 
+        url: API_URL + 'auth/recovery',
+        options: {
+            method: 'POST',
+            headers: {
+                'content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                body
+            )
+        }
+    }
+}
+
+export function PASSWORD_RESET(body, key) {
+    return{ 
+        url: API_URL + 'auth/recoverypass/' + key,
+        options: {
+            method: 'PATCH',
+            headers: {
+                'content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                body
+            )
+        }
+    }
+}
+
+export function NEWS_GET() {
+    return{ 
+        url: API_URL + 'news/',
+        options: {
+            method: 'GET',
+            headers: {
+                'content-Type': 'application/json',
+            },
+        }
+    }
+}

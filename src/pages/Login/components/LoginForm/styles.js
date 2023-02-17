@@ -19,6 +19,13 @@ export const LoginStyle = styled.div`
         flex: 1;
     }
 
+    .error{
+        text-align: center;
+        color: #f31;
+        font-size: .875rem;
+        margin: 0.25rem;
+    }
+
     .containerForm{
         display: flex;
         justify-content: center;

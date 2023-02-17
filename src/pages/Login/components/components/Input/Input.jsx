@@ -1,7 +1,5 @@
 import { InputDiv } from "./styles";
 
-
-
 export function Input({label, type, name, value, onChange, error, onBlur}) {
     return(
         <>

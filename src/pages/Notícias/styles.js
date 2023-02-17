@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-export const HomeContainer = styled.div`
+export const NoticiasCard = styled.div`
 
   .swiper-container{
     margin-top: 3.125rem;
@@ -14,7 +14,6 @@ export const HomeContainer = styled.div`
   .slide-item img {
     width: 100%;
     max-width: 700px;
-    max-height: 500px;
     object-fit: cover;
   }
 
@@ -26,11 +25,14 @@ export const HomeContainer = styled.div`
 
   .card{
     display: grid;
+    
     grid-template-columns: 1fr 1fr 1fr;
 
     gap: 2rem;
 
-    margin-bottom: 3.125rem;
+    margin: 3.125rem auto 3.125rem auto;
+
+    /* margin:  3.125rem auto 20% auto; */
 
     font-size: 1rem;
   }

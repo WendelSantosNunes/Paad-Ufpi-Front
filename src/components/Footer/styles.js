@@ -2,6 +2,14 @@ import styled from 'styled-components'
 
 export const FooterContainer = styled.footer`
     background-color: #222831;
+
+    .footerEnd{
+        background-color: #EEE;
+        text-align: center;
+
+        font-size: 1.3rem;
+        padding: 0.6875rem 0;
+    }
 `
 
 export const FooterDiv = styled.div`
@@ -37,5 +45,11 @@ export const FooterDiv = styled.div`
         }
     }
     
-
+    @media (max-width: 600px){
+        flex-direction: column;
+        align-items: center;
+        div{
+             justify-content: center;
+        }
+    }
 `

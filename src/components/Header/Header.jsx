@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 import { HeaderContainer, Menu, SocialMedia } from "./styles";
 import { InstagramLogo, YoutubeLogo } from 'phosphor-react'
 import Logo from '../../images/Logo.svg'
+import { UserContext } from "../../context/UserContext";
+import { useContext } from "react";
 
 export function Header(){
+    const {data, userLogout} = useContext(UserContext)
+
     return (
         <HeaderContainer >
             <SocialMedia>
@@ -28,7 +32,16 @@ export function Header(){
                     </div>
                     <nav>
                         <Link to='/'>Home</Link>
-                        <Link to='/login'>Login</Link>
+                        <Link to='/about'>Sobre</Link>
+                        <Link to='/news'>Notícias</Link>
+
+                        {/* Data existe então faça isso */}
+                        {data ? (
+                            <button onClick={userLogout}>Sair</button>
+                        ):(
+                            <Link to='/login'>Login</Link> 
+                        )}
+
                     </nav>
                 </div>
             </Menu>

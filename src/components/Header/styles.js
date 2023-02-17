@@ -11,7 +11,7 @@ export const SocialMedia = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem 0;
+        padding: 0.5rem 0.5rem;
 
         .email{
             font-size: 1.5rem;
@@ -34,6 +34,10 @@ export const SocialMedia = styled.div`
                 color: #484B4D;
             }
         }
+
+        @media (max-width: 18.75rem){
+            flex-direction: column;
+        }
     }
 `
 
@@ -42,7 +46,7 @@ export const Menu = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem 0;
+        padding: 0.5rem 0.5rem;
 
         div{
             padding: 0.5rem 0 0.25rem 0;
@@ -62,6 +66,27 @@ export const Menu = styled.div`
                     font-size: 1.25rem;
                 }
             }
+
+            button {
+                border: none;
+                border-radius: 20px;
+                color: #EEE;
+                background-color: #484B4D;
+
+                padding: 0.6rem 0.5rem;
+
+                font-size: 1.125rem;
+
+                cursor: pointer;
+
+                :hover {
+                    background-color: red;
+                }
+            }
+        }
+
+        @media (max-width: 18.75rem){
+            flex-direction: column;
         }
     }
 `

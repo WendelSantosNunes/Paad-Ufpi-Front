@@ -6,7 +6,6 @@ import { useFetch } from "../../../../Hooks/useFetch";
 import { PASSWORD_RESET } from "../../../../api";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 
 
 export function LoginPasswordReset(){

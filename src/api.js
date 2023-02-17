@@ -70,3 +70,16 @@ export function NEWS_GET() {
         }
     }
 }
+
+
+export function NEWS_GET_ID(Key) {
+    return{ 
+        url: API_URL + 'news/' + Key,
+        options: {
+            method: 'GET',
+            headers: {
+                'content-Type': 'application/json',
+            },
+        }
+    }
+}

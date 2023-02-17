@@ -1,25 +1,22 @@
-import { Card } from './components/card/Card'
-import { NoticiasCard } from './styles'
-import { useFetch } from "../../Hooks/useFetch";
-import { NEWS_GET } from '../../api'
-import { useEffect } from 'react';
-
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import { TodasNoticias } from './components/TodasNoticias/TodasNoticias';
+import { Navigate, Route, Routes } from "react-router-dom";
+import { NewsID } from "./components/NewsID/NewsID";
 
 export function Noticias(){
-  const { data, loading, error, request } = useFetch()
+  const {login} = useContext(UserContext)
 
-  useEffect(() => {
-      const {url, options } = NEWS_GET()
-      request(url, options)
-  },[])
-
-  return (
-    <NoticiasCard className='container'>
-      <div className="card">
-                { data && data.results.map( (item) => { 
-                  return <Card key={item.id} title={item.title} description={item.description} image={item.image}/>
-                })}
-            </div>
-    </NoticiasCard>
-  )
+  if(login === true){
+    return <Navigate to='/' />
+  }else{
+      return(
+          <>
+              <Routes>
+                  <Route path="/" element={<TodasNoticias />} />
+                  <Route path="/news-id/*" element={<NewsID />} />
+              </Routes>
+          </>
+      )
+  }
 }

@@ -34,6 +34,7 @@ export function Header(){
                         <Link to='/'>Home</Link>
                         <Link to='/about'>Sobre</Link>
                         <Link to='/news'>Notícias</Link>
+                        <Link to='/publication'>Publicação</Link>
 
                         {/* Data existe então faça isso */}
                         {data ? (

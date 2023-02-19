@@ -9,7 +9,7 @@ import { NoticiasCard } from './styles'
 
 
 export function TodasNoticias(){
-  const { data, loading, error, request } = useFetch()
+  const { data, request } = useFetch()
   const {login} = useContext(UserContext)
   const [end, setEnd] = useState(6)
   const [start, setStart] = useState(0)
@@ -34,13 +34,14 @@ export function TodasNoticias(){
                   })}
         </div>
 
-        { login && <>
-          <div className='options'>
-            <div><Link to='create-news/'>Adicionar Noticía</Link></div>
-            <div onClick={handleMais}>Ver mais</div>
-          </div>
-        </>
-      }
+        { 
+          login && <>
+            <div className='options'>
+              <div><Link to='create-news/'>Adicionar Noticía</Link></div>
+              <div onClick={handleMais}>Ver mais</div>
+            </div>
+          </>
+        }
       </NoticiasCard>
       
     </>

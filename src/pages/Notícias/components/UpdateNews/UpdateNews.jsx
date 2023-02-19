@@ -19,7 +19,6 @@ export function UpdateNews() {
   useEffect(() => {
     async function fetchData() {
 
-      console.log(key)
       try {
         const response = await axios.get('https://api-paadupfi.onrender.com/news/' + key)
         
@@ -84,9 +83,13 @@ export function UpdateNews() {
       // if(title.value !== '' || value !== '' || image !== ''){
       //   return "Error"
       // }
+      const token = window.localStorage.getItem('Token')
 
-      // Falta passar a autorização 
-      const response = await axios.patch('https://api-paadupfi.onrender.com/news/' + key, formData)
+      const response = await axios.patch('https://api-paadupfi.onrender.com/news/' + key, formData, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        }
+      })
 
       console.log(response)
 

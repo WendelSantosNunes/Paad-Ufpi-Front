@@ -56,10 +56,14 @@ export function CreaterNews() {
       // if(title.value !== '' || value !== '' || image !== ''){
       //   return "Error"
       // }
-      // Falta passar a autorização 
-      console.log(title, value, image)
+    
+      const token = window.localStorage.getItem('Token')
 
-      const response = await axios.post('https://api-paadupfi.onrender.com/news', formData)
+      const response = await axios.post('https://api-paadupfi.onrender.com/news', formData, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        }
+      })
       
       console.log(response)
 

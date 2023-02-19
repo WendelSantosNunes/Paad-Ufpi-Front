@@ -1,24 +1,17 @@
-import { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
-import { Navigate, Route, Routes } from "react-router-dom";
-// import { LoginForm } from "./components/LoginForm/LoginForm";
-// import { LoginPasswordLost } from "./components/LoginPasswordLost/LoginPasswordLost";
-// import { LoginPasswordReset } from "./components/LoginPasswordReset/LoginPasswordReset";
+import { Route, Routes } from "react-router-dom";
+import { CreatePublication } from "./components/CreatePublication/CreatePublication";
+import { PublicationStart } from "./components/PublicationStart/PublicationStart";
+import { UpdatePubliation } from "./components/UpdatePublication/UpdatePublication";
 
 export function Publicaction(){
-    const {login} = useContext(UserContext)
 
-    if(login === true){
-        return <Navigate to='/' />
-    }else{
-        return(
-            <>
-                <Routes>
-                    {/* <Route path="/" element={<LoginForm />} />
-                    <Route path="/password" element={<LoginPasswordLost />} />
-                    <Route path="/recovery-pass/" element={<LoginPasswordReset />} /> */}
-                </Routes>
-            </>
-        )
-    }
+    return(
+        <>
+            <Routes>
+                <Route path="/" element={<PublicationStart />} />
+                <Route path="/create-publication" element={<CreatePublication />} />
+                <Route path="/update-publication/*" element={<UpdatePubliation />} />
+            </Routes>
+        </>
+    )
 }

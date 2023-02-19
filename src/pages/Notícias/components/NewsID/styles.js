@@ -39,4 +39,32 @@ export const ContainerNewsID = styled.section`
 
     color: #222831;
   }
+
+  .options{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    margin-bottom: 2.5rem;
+
+    font-size: 1.125rem;
+
+    div{
+      background-color: var(--button);
+      padding: 1rem;
+
+      border-radius: 15px;
+
+      color: var(--fonts);
+      cursor: pointer;
+
+      a {
+        color: var(--fonts)
+      }
+
+      :hover{
+        background-color: red;
+      }
+    }
+  }
 `

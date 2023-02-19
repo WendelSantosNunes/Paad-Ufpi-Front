@@ -1,12 +1,11 @@
 import { CardStyle } from "./styles";
-import { API_URL } from "../../../../api";
 
 export function Card({title, description,image}){
 
   return (
     <CardStyle>
       <div>
-        <img src={API_URL + image} alt="" />
+        <img src={image} alt="" />
       </div>
       <div className="description">
         <div>

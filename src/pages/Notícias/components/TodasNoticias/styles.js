@@ -2,22 +2,6 @@ import styled from "styled-components";
 
 export const NoticiasCard = styled.div`
 
-  .swiper-container{
-    margin-top: 3.125rem;
-  }
-  
-  .slide-item {
-    text-align: center;
-    margin: auto 0;
-  } 
-
-  .slide-item img {
-    width: 100%;
-    max-width: 700px;
-    object-fit: cover;
-  }
-
-
   h2{
     margin: 2.5rem 0 2.1875rem;
     font-size: 1.125rem;
@@ -25,16 +9,51 @@ export const NoticiasCard = styled.div`
 
   .card{
     display: grid;
-    
     grid-template-columns: 1fr 1fr 1fr;
-
     gap: 2rem;
 
     margin: 3.125rem auto 3.125rem auto;
 
-    /* margin:  3.125rem auto 20% auto; */
-
     font-size: 1rem;
+
+    @media (max-width: 68.75rem){
+      grid-template-columns: 1fr 1fr;
+
+      div{
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 46.875rem){
+      grid-template-columns: 1fr;
+
+      display: flex;
+      flex-direction: column;
+    }
   }
   
+  .options{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    margin-bottom: 3.125rem;
+
+    div{
+      background-color: #393E46;
+      padding: 1rem;
+
+      color: #eee;
+
+      border-radius: 15px;
+      cursor: pointer;
+      a{
+        color: #eee;
+      }
+
+      :hover{
+        background-color: var(--button-hover)
+      }
+    }
+  }
 `

@@ -6,13 +6,13 @@ import Paad2Img from '../../images/paad2.jpeg'
 import { useFetch } from "../../Hooks/useFetch";
 import { NEWS_GET } from '../../api'
 
-
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { Card } from "./components/card/Card";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export function Home(){
 
@@ -59,7 +59,7 @@ export function Home(){
             <div className="card">
                 { data && data.results.map( (item, key) => { 
                     if(key < 3){
-                        return <Card key={item.id} title={item.title} description={item.description} image={item.image}/>
+                        return  <Link to={'/news/news-id/?key=' + item.id}  key={item.id}><Card title={item.title} description={item.description} image={item.image}/></Link>                    
                     }   
                 })}
             </div>

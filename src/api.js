@@ -1,4 +1,5 @@
 export const API_URL = 'https://api-paadupfi.onrender.com/'
+// export const API_URL = 'http://localhost:3000/'
 
 // Nós adicionamos aqui as configurações
 export function TOKEN_POST(body) {
@@ -80,6 +81,48 @@ export function NEWS_GET_ID(Key) {
             headers: {
                 'content-Type': 'application/json',
             },
+        }
+    }
+}
+
+export function NEWS_POST(formData,token){
+    return{
+        url: API_URL + 'news/',
+        options: {
+            method: 'POST',
+            headers: {
+                'content-Type': 'multipart/form-data',
+                Authorization: 'Bearer ' + token,
+            },
+            body:formData,
+        }
+    }
+}
+
+export function NEWS_DELETE_ID(key,token){
+    return{
+        url: API_URL + 'news/' + key,
+        options: {
+            method: 'DELETE',
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'content-Type': 'application/json',
+            },
+        }
+    }
+}
+
+export function NEWS_UPDATE_ID(key,token){
+    return{
+        url: API_URL + 'news/' + key,
+        options: {
+            method: 'UPDATE',
+            headers: {
+                Authorization: 'Bearer ' + token,
+            },
+            body: JSON.stringify(
+                body
+            )
         }
     }
 }

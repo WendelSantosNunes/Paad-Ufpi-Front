@@ -55,7 +55,7 @@ export const Menu = styled.div`
         nav{
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
             a{
                 text-decoration: none;
                 color: #EEE;

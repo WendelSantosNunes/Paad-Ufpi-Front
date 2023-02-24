@@ -32,7 +32,6 @@ export function LoginPasswordReset(){
         if(senha.validate()){ 
             const {url, options} = PASSWORD_RESET({currentPass: senha.value}, key)
             const json = await request(url, options)
-            console.log(json)
         }
     }
     

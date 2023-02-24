@@ -35,8 +35,9 @@ export function Header(){
                         <Link to='/about'>Sobre</Link>
                         <Link to='/news'>Notícias</Link>
                         <Link to='/publication'>Publicação</Link>
+                        <Link to='/project'>Projeto</Link>
+                        <Link to='/member'>Membros</Link>
 
-                        {/* Data existe então faça isso */}
                         {data ? (
                             <button onClick={userLogout}>Sair</button>
                         ):(

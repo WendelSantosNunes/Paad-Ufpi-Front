@@ -8,6 +8,9 @@ import { UserStorage } from "./context/UserContext"
 import { Sobre } from "./pages/Sobre/Sobre"
 import { Noticias } from "./pages/Notícias/Noticias"
 import { Publicaction } from "./pages/Publication/Publication"
+import { Project } from "./pages/Project/Project"
+import { Member } from "./pages/Member/Member"
+
 
 export function App() {
 
@@ -23,6 +26,8 @@ export function App() {
             <Route path="/about" element={<Sobre />} />
             <Route path="/news/*" element={<Noticias />} />
             <Route path="/publication/*" element={<Publicaction />} />
+            <Route path="/project/*" element={<Project />} />
+            <Route path="/member/*" element={<Member />} />
           </Routes>
           <Footer />
         </UserStorage>

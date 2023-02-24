@@ -65,8 +65,6 @@ export function CreaterNews() {
         }
       })
       
-      console.log(response)
-
       setLoading(false)
       navigate('/news')
     } catch (error) {

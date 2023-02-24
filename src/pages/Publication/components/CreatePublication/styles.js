@@ -42,6 +42,10 @@ export const ContainerCreatePublication = styled.section`
       }
     }
 
+    .category{
+      
+    }
+
     .link{
       display: flex;
       flex-direction: column;

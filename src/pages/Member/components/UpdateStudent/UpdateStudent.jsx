@@ -4,7 +4,7 @@ import { Button } from "../Button/Button";
 import { ContainerCreateStudent } from "./styles";
 import { useNavigate } from "react-router-dom";
 
-export function CreateStudent() {
+export function UpdateStudent(){
   const [loading, setLoading] = useState(false)
   const [fullName, setFullName] = useState('')
   const [image, setImage] = useState('')
@@ -13,6 +13,10 @@ export function CreateStudent() {
   const [teacher, setTeacher] = useState([]);
   const [email, setEmail] = useState('')
   const navigate = useNavigate()
+  const [studentGet, setStudentGet] = useState([])
+
+  const params = new URLSearchParams(window.location.search)
+  const key = params.get('key')
 
   function handleFullName({target}){
     setFullName(target.value)
@@ -53,21 +57,35 @@ export function CreateStudent() {
   }
 
   async function data(){
-    const response = await axios.get(`https://api-paadupfi.onrender.com/teacher/?limit=${35}&offset=${0}`)
+    try {
+      const response = await axios.get(`https://api-paadupfi.onrender.com/teacher/?limit=${35}&offset=${0}`)
 
-    setTeacher(response.data.results)
+      setTeacher(response.data.results)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function getStudent(){
+    let response = await axios.get(`https://api-paadupfi.onrender.com/student/${key}`)
+
+    setFullName(response.data.student.fullName)
+    setImage(response.data.student.image)
+    setEmail(response.data.student.email)
+    setSelectedTeacher(response.data.student.teacher._id)
+    setSelectedCourses(response.data.student.course)
+    setStudentGet(response.data.student)
   }
 
   useEffect(() => {
     data()
+    getStudent()
   },[])
 
   async function handleSubmit(event){
     setLoading(true)
     
     event.preventDefault()
-
-    console.log(fullName, image, selectedCourses, selectedTeacher, email)
 
     if(fullName != '' && image != '' && selectedCourses != '' && selectedTeacher != '' && email != '' ){
       const formData = new FormData()
@@ -81,14 +99,21 @@ export function CreateStudent() {
       formData.append('fullName', fullName)
 
       try{
-        let response = await axios.post('https://api-paadupfi.onrender.com/student/', formData, {
+
+        await axios.patch('https://api-paadupfi.onrender.com/teacher/remover/student', {student:studentGet.id, id: studentGet.teacher._id }, {
           headers: {
             Authorization: 'Bearer ' + token,
           }
         })
 
-        let id = response.data.student.teacher
-        let student = response.data.student._id
+        await axios.patch('https://api-paadupfi.onrender.com/student/' + key, formData, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          }
+        })
+  
+        let id = selectedTeacher
+        let student = key
 
         let response1 = await axios.patch('https://api-paadupfi.onrender.com/teacher/add/student', {id, student}, {
           headers: {
@@ -106,15 +131,13 @@ export function CreateStudent() {
 
       setLoading(false)
     }
-
-
   }
 
   return(
     <ContainerCreateStudent className="container">
       <div>
         <div className="title">
-          <h1>Estudante</h1>
+          <h1>Atualização de Dados</h1>
         </div>
 
         <form action="" onSubmit={handleSubmit}>
@@ -158,7 +181,7 @@ export function CreateStudent() {
 
           <div className="forms">
             <label htmlFor="email">Email</label>
-              <input type="text" name="email" id="email" onChange={handleEmail} required/>
+              <input type="text" name="email" id="email" value={email}onChange={handleEmail} required/>
           </div>
 
           {
@@ -173,5 +196,4 @@ export function CreateStudent() {
       </div>
     </ContainerCreateStudent>
   )
-
 }

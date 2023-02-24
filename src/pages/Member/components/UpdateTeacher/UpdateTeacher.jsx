@@ -1,26 +1,29 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../Button/Button";
 import { ContainerCreateTeacher } from "./styles";
 import { useNavigate } from "react-router-dom";
 
-export function CreateTeacher() {
+export function UpdateTeacher() {
+
   const [loading, setLoading] = useState(false)
-  const [student, setStudent] = useState([])
   const [selectedCourses, setSelectedCourses] = useState('');
   const [fullName, setFullName] = useState('')
   const [image, setImage] = useState('')
   const [email, setEmail] = useState('')
-  const [selectedOptionsStudent, setSelectedOptionsStudent] = useState([]);
+  const [students, setStudent] = useState([])
+  const [teacher, setTeacher] = useState()
   const navigate = useNavigate()
 
+  const params = new URLSearchParams(window.location.search)
+  const key = params.get('key')
 
   async function handleSubmit(event){
     setLoading(true)
 
     event.preventDefault()
     
-    console.log(fullName, image, selectedCourses,selectedOptionsStudent, email)
+    console.log(fullName, image, selectedCourses, email)
 
     const formData = new FormData()
 
@@ -30,25 +33,21 @@ export function CreateTeacher() {
     formData.append('email', email)
     formData.append('image', image)
     formData.append('fullName', fullName)
-    if(selectedOptionsStudent != [])
-      formData.append('students', selectedOptionsStudent)
+    formData.append('students', students)
 
     try {
-      let response = await axios.post('https://api-paadupfi.onrender.com/teacher/', formData, {
+      let response = await axios.patch('http://localhost:3000/teacher/' + key, formData, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
 
       setLoading(false)
-      navigate('/member')
-
+      // navigate('/member')
     }catch(error){
       console.log(error)
       setLoading(false)
     }
-    // console.log( student, selectedCourses,selectedOptionsStudent, email)
-
   }
 
   function handleFullName({target}){
@@ -77,43 +76,39 @@ export function CreateTeacher() {
     setImage(file)
   }
 
-  async function data(){
-    const response = await axios.get(`https://api-paadupfi.onrender.com/student/?limit=${35}&offset=${0}`)
-
-    setStudent(response.data.results)
-  }
-
-  useEffect(() => {
-    data()
-  },[])
-
   function handleCourses({target}){
     setSelectedCourses(target.value);
-  }
-
-  function handleStudent(event){
-    const options = event.target.options;
-    const selectedValues = [];
-    
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selectedValues.push(options[i].value);
-      }
-    }
-
-    setSelectedOptionsStudent(selectedValues);
   }
 
   function handleEmail({target}){
     setEmail(target.value)
   }
 
+  async function data(){
+    try {
+      const response = await axios.get(`https://api-paadupfi.onrender.com/teacher/${key}`)
+      
+
+      setFullName(response.data.teacher.fullName)
+      setSelectedCourses(response.data.teacher.course)
+      setEmail(response.data.teacher.email)
+      setStudent(response.data.teacher.students)
+      setTeacher(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  useEffect(() => {
+    data()
+  },[])
+
   return(
     <>
       <ContainerCreateTeacher className="container">
         <div>
           <div className="title">
-            <h1>Pesquisadores</h1>
+            <h1>Atualização de Dados</h1>
           </div>
 
           <form action="" onSubmit={handleSubmit}>
@@ -145,7 +140,7 @@ export function CreateTeacher() {
 
             <div className="forms">
               <label htmlFor="email">Email</label>
-              <input type="text" name="email" id="email" onChange={handleEmail} required/>
+              <input type="text" name="email" id="email" value={email} onChange={handleEmail} required/>
             </div>
 
             {

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 
 export const ContainerProject = styled.section`
+
   .title{
     text-align: center;
 
@@ -15,6 +16,10 @@ export const ContainerProject = styled.section`
       font-size: 1.5rem;
 
       margin-bottom: 0.4rem;
+    }
+
+    a {
+      color: #222831;
     }
   }
 

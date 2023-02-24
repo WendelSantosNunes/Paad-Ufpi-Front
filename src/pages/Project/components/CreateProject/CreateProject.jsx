@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 import { ContainerCreateProject } from "./styles";
 import { Button } from "../../../Login/components/components/Button/Button"
 
@@ -33,7 +32,7 @@ export function CreateProject(){
       //   }
       // })
 
-      let response = await axios.post('http://localhost:3000/project/', {title: title, description: description, category: selectedOption,teacher:selectedOptionsTeachers,student: selectedOptionsStudent}, {
+      let response = await axios.post('https://api-paadupfi.onrender.com/project/', {title: title, description: description, category: selectedOption,teacher:selectedOptionsTeachers,student: selectedOptionsStudent}, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
@@ -127,8 +126,8 @@ export function CreateProject(){
                 </div>
 
                 <div className="categoryItem">
-                  <input type="radio" name="category"  id="category" value="Desenvolvimento tecnólogico" checked={selectedOption === 'Desenvolvimento tecnólogico'} onChange={handleOptionChange}/>
-                  <p>Desenvolvimento tecnólogico</p>
+                  <input type="radio" name="category"  id="category" value="Desenvolvimento tecnológico" checked={selectedOption === 'Desenvolvimento tecnológico'} onChange={handleOptionChange}/>
+                  <p>Desenvolvimento tecnológico</p>
                 </div>
 
                 <div className="categoryItem">

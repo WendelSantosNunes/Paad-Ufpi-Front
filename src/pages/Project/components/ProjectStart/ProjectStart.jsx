@@ -22,6 +22,10 @@ export function ProjectStart(){
     data()
   },[end])
 
+  function handleMais(){
+    setEnd(start + 4)
+  }
+  
   // console.log(results)
 
   return(
@@ -33,38 +37,29 @@ export function ProjectStart(){
         </div>
 
         { results && results.map((item) => {
-          console.log(item)
           return <div className="titleProject" key={item.id}>
+            <Link to={"project-id?key=" + item.id}>
               <h2>{item.title}</h2>
 
               <hr />
 
-              <p className="collaborators"> {item.teacher.map((item) => item.nome + ' - ')} Coordenador / {item.student.map((item) => item.nome + ' - ')}  Integrante </p>
+              <p className="collaborators"> {item.teacher.map((item) => item.fullName + ' - ')} Coordenador / {item.student.map((item) => item.fullName + ' - ')}  Integrante </p>
 
               <p className="text">
                 {item.description}
               </p>
+              </Link>
+
+              {/* Editar e Excluir */}
             </div>
         })}
 
-
-        {/* <div className="titleProject">
-          <h2>Serviços Inteligentes para Predição de Índices de Criminalidade Urbana Baseado em Fontes de Dados Abertas Geradas por Usuários na Web</h2>
-
-          <hr />
-
-          <p className="collaborators">Glauber Dias Goncalves - Coordenador / Saul Sousa da Rocha - Integrante </p>
-
-          <p className="text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-          </p>
-        </div> */}
 
         {    
           login && <>
             <div className='options'>
               <div><Link to='create-project/'>Adicionar Projeto</Link></div>
-              <div>Ver mais</div>
+              <div onClick={handleMais}>Ver mais</div>
             </div>
           </>
         }

@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../context/UserContext";
 import { Button } from "../Button/Button";
-import { Card } from "../Card/Card";
 import { MemberContainer ,CardStyle} from "./styles";
 
 export function MemberStar(){
@@ -36,22 +35,47 @@ export function MemberStar(){
 
     const token = window.localStorage.getItem('Token')
     
-    console.log(student, teacher)
     try {     
-      let response = await axios.delete(`http://localhost:3000/student/${student}`, {
+      let response = await axios.delete(`https://api-paadupfi.onrender.com/student/${student}`, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
 
-      let response1 = await axios.patch('http://localhost:3000/teacher/remover/student', {student:student, id: teacher }, {
+      let response1 = await axios.patch('https://api-paadupfi.onrender.com/teacher/remover/student', {student:student, id: teacher }, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
 
       console.log(response1)
-      // navigate('/news/')
+      navigate('member/')
+    } catch (error) {
+      console.log(error) 
+    }
+  } 
+
+  async function handleDeleteTeacher(teacher, student){
+
+    const token = window.localStorage.getItem('Token')
+        
+    try {     
+      let response = await axios.delete(`https://api-paadupfi.onrender.com/teacher/${teacher}`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        }
+      })
+
+      student.map( async (item) => {
+        await axios.delete(`https://api-paadupfi.onrender.com/student/${item}`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        }
+        })
+      })
+
+      console.log(response)
+      navigate('member/')
     } catch (error) {
       console.log(error) 
     }
@@ -76,8 +100,8 @@ export function MemberStar(){
 
           <div>
           {teacher && teacher.map((item) => {
-              return <div className="cardMain"> 
-                <Link to={"member-id?key=" + item.id} key={item.id} className="card">
+              return <div className="cardMain" key={item.id}> 
+                <Link to={"member-id?key=" + item.id} className="card">
                   <CardStyle className="card">
                     <div>
                       <img src={item.image} alt="" />
@@ -95,8 +119,10 @@ export function MemberStar(){
                 {
                   login && <>
                     <div className="option">
-                      <Link to='create-student/'>Editar</Link>
-                      <div onClick={handleDeleteStudent} value={item.id}>Excluir</div>
+                      <Link to={'update-teacher-id/?key=' + item.id} key={item.id}>Editar</Link>
+                      <div onClick={(event) => {
+                        event.preventDefault()
+                        handleDeleteTeacher(item.id,item.students)}}>Excluir</div>
                     </div>
                   </>
                 }
@@ -122,8 +148,8 @@ export function MemberStar(){
 
           <div>
             {student && student.map((item) => {
-              return <div className="cardMain"> 
-                <Link to={"member-student-id?key=" + item.id} key={item.id} className="card">
+              return <div className="cardMain" key={item.id}> 
+                <Link to={"member-student-id?key=" + item.id} className="card">
                   <CardStyle className="card">
                     <div>
                       <img src={item.image} alt="" />
@@ -141,7 +167,7 @@ export function MemberStar(){
                 {
                   login && <>
                     <div className="option">
-                      <Link to='create-student/'>Editar</Link>
+                      <Link to={'update-student-id/?key=' + item.id} key={item.id}>Editar</Link>
                       <div onClick={(event) => {
                         event.preventDefault()
                         handleDeleteStudent(item.id, item.teacher)}} value={item.id}

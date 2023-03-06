@@ -27,5 +27,8 @@ export const ButtonContainer = styled.div`
             background-color: var(--button-hover);;
         }
     }
-   
+
+    @media (max-width: 26.875rem){
+        margin: 0 1rem;
+    }
 `

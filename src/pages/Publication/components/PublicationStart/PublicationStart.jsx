@@ -84,16 +84,20 @@ export function PublicationStart(){
                 </div>
             }
           })
-        }
+        }    
+         
+        <div className='options'>
+          {
+            login && <>
+              <div>
+                <Link to='create-publication/'>Adicionar Publicação</Link>
+              </div>
+            </>
+          }
+ 
+          <div onClick={handleMais}>Ver mais</div>
+        </div>
 
-        {    
-          login && <>
-            <div className='options'>
-              <div><Link to='create-publication/'>Adicionar Publicação</Link></div>
-              <div onClick={handleMais}>Ver mais</div>
-            </div>
-          </>
-        }
       </PublicationContainer>
     </>
   )

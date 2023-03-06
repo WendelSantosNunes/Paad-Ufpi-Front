@@ -18,6 +18,8 @@ export const InputDiv = styled.div`
         border-radius: 5px;
 
         padding: 0.5rem 0 0.5rem 1.25rem;
+
+        width: 90%;
     }
 
    .error{

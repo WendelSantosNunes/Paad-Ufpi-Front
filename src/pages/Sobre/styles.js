@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const SobreContainer = styled.div`
 
+  flex-grow: 1;
+  min-height: 31.25rem;
 
   h1{
     text-align: center;
@@ -55,13 +57,9 @@ export const SobreContainer = styled.div`
 
   #map { height: 180px; }
 
-  a{
+  .google-map-code{
     text-align: center;
-
-    img{
-      width: 100%;
-      margin-bottom: 2.375rem;
-    }
+    margin-bottom: 2.375rem;
   }
 `
 

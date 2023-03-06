@@ -4,6 +4,7 @@ import { InstagramLogo, YoutubeLogo } from 'phosphor-react'
 import Logo from '../../images/Logo.svg'
 import { UserContext } from "../../context/UserContext";
 import { useContext } from "react";
+import { slide as Menus } from 'react-burger-menu'
 
 export function Header(){
     const {data, userLogout} = useContext(UserContext)
@@ -30,7 +31,7 @@ export function Header(){
                             <img src={Logo} alt="Logo" />
                         </Link>
                     </div>
-                    <nav>
+                    <nav className="menus">
                         <Link to='/'>Home</Link>
                         <Link to='/about'>Sobre</Link>
                         <Link to='/news'>Notícias</Link>
@@ -43,7 +44,6 @@ export function Header(){
                         ):(
                             <Link to='/login'>Login</Link> 
                         )}
-
                     </nav>
                 </div>
             </Menu>

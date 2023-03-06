@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const NoticiasCard = styled.div`
 
+  flex-grow: 1;
+  min-height: 31.25rem;
+
   h2{
     margin: 2.5rem 0 2.1875rem;
     font-size: 1.125rem;
@@ -35,6 +38,7 @@ export const NoticiasCard = styled.div`
   .options{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 1rem;
 
     margin-bottom: 3.125rem;

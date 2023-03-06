@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const ContainerCreatePublication = styled.section`
 
+  flex-grow: 1;
+  min-height: 31.25rem;
+
   background-color: #222831;
 
   border-radius: 0.7rem;
@@ -40,10 +43,7 @@ export const ContainerCreatePublication = styled.section`
         margin: 0 0 1rem 0.5rem;
         padding: 0.5rem;
       }
-    }
 
-    .category{
-      
     }
 
     .link{

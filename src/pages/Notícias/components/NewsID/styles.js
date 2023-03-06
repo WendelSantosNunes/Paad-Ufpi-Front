@@ -2,11 +2,18 @@ import styled from "styled-components";
 
 export const ContainerNewsID = styled.section`
 
+  flex-grow: 1;
+  min-height: 31.25rem; 
+
   .title {
     margin-top: 2.625rem;
     font-size: 2rem;
 
     text-align: center;
+
+    @media (max-width: 300px){
+        font-size: 1.6rem;
+    }
   }
   
   .image{
@@ -43,6 +50,8 @@ export const ContainerNewsID = styled.section`
   .options{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+
     gap: 20px;
 
     margin-bottom: 2.5rem;
@@ -65,6 +74,10 @@ export const ContainerNewsID = styled.section`
       :hover{
         background-color: red;
       }
+    }
+
+    @media (max-width: 300px){
+      padding-bottom: 2rem;
     }
   }
 `

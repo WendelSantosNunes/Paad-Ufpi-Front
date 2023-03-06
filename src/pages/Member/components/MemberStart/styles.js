@@ -1,14 +1,24 @@
 import styled from "styled-components";
 
 export const MemberContainer = styled.section`
-
+  
+  flex-grow: 1;
+  min-height: 31.25rem;
 
   .title{
     text-align: center;
 
-    margin: 2.625rem;
+    margin: 2.625rem auto;
 
     font-size: 2rem;
+
+    @media (max-width: 19.0625rem){ 
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 15.625rem){ 
+      font-size: 1.2rem;
+    }
   }
 
   .member{
@@ -21,9 +31,20 @@ export const MemberContainer = styled.section`
     > div{
       margin-top: 1rem;
 
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      @media (max-width: 67.5rem){ 
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        gap: 20px;
+      }
+
+      @media (max-width: 46.25rem){ 
+        display: flex;
+        align-items: center;
+        flex-direction: column; 
+      }
     }
 
     .cardMain {
@@ -110,5 +131,9 @@ export const CardStyle = styled.div`
     display: flex;
 
     color: red;
+
+    @media (max-width: 18.75rem){ 
+      flex-direction: column; 
+    }
   }
 `

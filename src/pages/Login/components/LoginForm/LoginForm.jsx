@@ -50,7 +50,7 @@ export function LoginForm() {
                             </form>
                         </div>
                     </div>
-                    <div>
+                    <div className="image">
                         <img src={Login1} alt="Imagem ilustrativa" />
                     </div>
                 </LoginStyle>

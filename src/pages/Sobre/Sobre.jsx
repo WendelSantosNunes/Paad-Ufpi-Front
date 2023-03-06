@@ -1,6 +1,5 @@
 import { SobreContainer } from "./styles";
 import PaadImg from '../../images/Paad.png'
-import MapaImg from '../../images/Mapa.png'
 
 export function Sobre(){
 
@@ -19,10 +18,9 @@ export function Sobre(){
 
       <h2>Localização</h2>
 
-      <a href="https://www.google.com/maps/search/UFPI/@-7.0816893,-41.4372442,17z/data=!3m1!4b1" target="_blank">      
-        <img src={MapaImg} alt="Imagem do mapa da localização do  PAAD" />
-      </a>
-
+      <div className="google-map-code">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.3815441117235!2d-41.43724423522628!3d-7.081689344885593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x79c1a843b8a035d%3A0x362c9952b4717405!2sUniversidade%20Federal%20do%20Piau%C3%AD%20-%20Picos!5e0!3m2!1spt-BR!2sbr!4v1678101382670!5m2!1spt-BR!2sbr" width="1000" height="450" frameborder="0" style={{border:0}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      </div>
     </SobreContainer>
   )
 }

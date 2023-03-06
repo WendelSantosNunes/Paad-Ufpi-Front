@@ -13,9 +13,9 @@ export function ProjectID(){
   const key = params.get('key')
 
   async function data(){
-    const response = await axios.get(`https://api-paadupfi.onrender.com/project/?${key}`)
-    
-    setResults(response.data.results)
+    const response = await axios.get(`https://api-paadupfi.onrender.com/project/${key}`)
+
+    setResults(response.data.project)
   }
 
   useEffect(() => {
@@ -26,40 +26,40 @@ export function ProjectID(){
     const token = window.localStorage.getItem('Token')
 
     try {
-      let response = await axios.delete(`https://api-paadupfi.onrender.com/project/${key}`, {
+      await axios.delete(`https://api-paadupfi.onrender.com/project/${key}`, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
-      console.log(response)
       navigate('/project')
     } catch (error) {
       console.log(error)
     }
   }
 
+
   return(
     <ContainerProjectId className="container">
 
      {
-      login && results[0] && <>
+      results && <>
         <div className="title">
-          <h1>{results[0].title}</h1>
+          <h1>{results.title}</h1>
         </div>
 
         <div>
           <h2>Professores:</h2>
-          {results[0].teacher.map(item => <p key={item.id}>{item.fullName}</p>)}
+          {results.teacher && results.teacher.map(item => <p key={item.id}>{item.fullName}</p>)}
         </div>
 
         <div>
           <h2>Alunos:</h2>
-          {results[0].student.map(item => <p key={item.id}>{item.fullName}</p>)}
+          {results.student && results.student.map(item => <p key={item.id}>{item.fullName}</p>)}
         </div>
 
         <div>
           <h2>Descrição:</h2>
-          <p>{results[0].description}</p>
+          <p>{results.description}</p>
         </div>
 
         {

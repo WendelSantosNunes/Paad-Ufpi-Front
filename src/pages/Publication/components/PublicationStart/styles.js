@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const PublicationContainer = styled.section`
+  
+  flex-grow: 1;
+  min-height: 31.25rem;
+
   .title{
     text-align: center;
 
@@ -25,9 +29,10 @@ export const PublicationContainer = styled.section`
   .options {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 1rem;
 
-    margin-bottom: 3.125rem;
+    margin-bottom: 5.125rem;
 
     div{
       background-color: #393E46;

@@ -61,4 +61,21 @@ export const LoginStyle = styled.div`
             }
         }
     }
+
+    @media (max-width: 62.5rem){
+        .image{
+            display: none;
+        }
+    }
+
+    @media (max-width: 26.875rem){
+        .containerForm{
+            > div{
+                h1, h2{
+                    text-align: center;
+                }
+            }
+        }
+    }
+   
 `

@@ -25,8 +25,11 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body{
+        display: flex;
+        flex-direction: column;
+        
         max-width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
         background-color: #EEEEEE;
     }
 
@@ -51,6 +54,7 @@ export const GlobalStyles = createGlobalStyle`
 
     .container {
         max-width: 70rem;
+        width: 100%;
         padding: 0rem 1rem;
         margin: 0 auto;
     }

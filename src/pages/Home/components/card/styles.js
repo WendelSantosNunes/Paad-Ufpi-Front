@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const CardStyle = styled.div`
   width: 100%;
-  max-width: 333px;
-  height: 346px;
+  max-width: 20.8125rem;
+  height: 21.625rem;
 
   background-color: #393E46;
 

@@ -48,6 +48,7 @@ export const FooterDiv = styled.div`
     @media (max-width: 600px){
         flex-direction: column;
         align-items: center;
+        
         div{
              justify-content: center;
         }

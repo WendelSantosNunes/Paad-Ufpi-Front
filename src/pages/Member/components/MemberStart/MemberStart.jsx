@@ -49,7 +49,7 @@ export function MemberStar(){
       })
 
       console.log(response1)
-      navigate('member/')
+      navigate('/member')
     } catch (error) {
       console.log(error) 
     }

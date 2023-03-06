@@ -85,6 +85,16 @@ export const Menu = styled.div`
             }
         }
 
+        .menuDiv {
+            display: none;
+        }
+
+        @media (max-width: 41.6875rem){
+            .menus{
+                display: none;
+            }
+        }
+
         @media (max-width: 18.75rem){
             flex-direction: column;
         }

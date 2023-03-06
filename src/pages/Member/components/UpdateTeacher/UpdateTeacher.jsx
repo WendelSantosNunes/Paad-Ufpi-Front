@@ -35,15 +35,16 @@ export function UpdateTeacher() {
     formData.append('fullName', fullName)
     formData.append('students', students)
 
+
     try {
-      let response = await axios.patch('http://localhost:3000/teacher/' + key, formData, {
+      let response = await axios.patch('https://api-paadupfi.onrender.com/teacher/' + key, formData, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
 
       setLoading(false)
-      // navigate('/member')
+      navigate('/member')
     }catch(error){
       console.log(error)
       setLoading(false)
@@ -94,6 +95,7 @@ export function UpdateTeacher() {
       setEmail(response.data.teacher.email)
       setStudent(response.data.teacher.students)
       setTeacher(response.data)
+      setImage(response.data.teacher.image)
     } catch (error) {
       console.log(error)
     }
@@ -120,7 +122,7 @@ export function UpdateTeacher() {
 
             <div className="images">
               <label htmlFor="image">Imagem</label>
-              <input type="file" name="image" id="image" onChange={handleImage} required />
+              <input type="file" name="image" id="image" onChange={handleImage} />
             </div>
 
             <div className="forms">

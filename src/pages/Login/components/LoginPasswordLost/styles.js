@@ -23,10 +23,18 @@ export const LoginLostStyle = styled.div`
   }
 
   form{
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
 
     button{
       max-width: 15rem;
+    }
+  }
+
+  @media (max-width: 26.875rem){
+    h1{
+      text-align: center;
+      font-size: 1.4rem;
     }
   }
 `

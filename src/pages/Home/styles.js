@@ -35,4 +35,33 @@ export const HomeContainer = styled.div`
     font-size: 1rem;
   }
   
+  @media (max-width: 69.375rem){
+    .card {
+      grid-template-columns: 1fr 1fr;
+
+      a{
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+
+
+  @media (max-width: 46.875rem){
+    .card {
+      grid-template-columns: 1fr;
+
+      a{
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+
+ @media (max-width: 23.125rem){
+    .card {
+      display: flex;
+      flex-direction: column;
+    }
+  }  
 `

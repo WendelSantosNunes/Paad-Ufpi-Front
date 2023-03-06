@@ -19,7 +19,7 @@ export const ContainerCreateTeacher = styled.section`
 
     .title{
       text-align: center;
-      margin: 2.625rem;
+      /* margin: 2.625rem; */
 
 
       h1{
@@ -70,9 +70,9 @@ export const ContainerCreateTeacher = styled.section`
       margin-bottom: 3rem;
     }
   }
-
+/* 
   @media (max-width: 71.875rem){
     margin: 0 1rem;
-  }
+  } */
 `
 

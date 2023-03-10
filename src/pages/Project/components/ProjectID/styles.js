@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const ContainerProjectId = styled.section`
+  flex-grow: 1;
+  min-height: 31.25rem;
+
   .title{
     text-align: center;
 

@@ -1,11 +1,13 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import { Button } from "../Button/Button";
 import { ContainerCreateTeacher } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { NotLogin } from "../../../../components/NotLogin/NotLogin";
+import { UserContext } from "../../../../context/UserContext";
 
 export function UpdateTeacher() {
-
+  const {login} = useContext(UserContext)
   const [loading, setLoading] = useState(false)
   const [selectedCourses, setSelectedCourses] = useState('');
   const [fullName, setFullName] = useState('')
@@ -29,7 +31,6 @@ export function UpdateTeacher() {
     const formData = new FormData()
 
     const token = window.localStorage.getItem('Token')
-    let response 
 
     formData.append('course', selectedCourses)
     formData.append('email', email)
@@ -39,13 +40,13 @@ export function UpdateTeacher() {
 
     try {
       if(haveImage == 1){
-        response = await axios.patch('https://api-paadupfi.onrender.com/teacher/' + key, formData, {
+        await axios.patch('https://api-paadupfi.onrender.com/teacher/' + key, formData, {
           headers: {
             Authorization: 'Bearer ' + token,
           }
         })
       }else{
-        response = await axios.patch('https://api-paadupfi.onrender.com/teacher/update/' + key, {
+        await axios.patch('https://api-paadupfi.onrender.com/teacher/update/' + key, {
           course: selectedCourses,
           email: email,
           image: image,
@@ -58,7 +59,6 @@ export function UpdateTeacher() {
         })
       }
 
-      console.log(response)
       setLoading(false)
       navigate('/member')
     }catch(error){
@@ -124,54 +124,60 @@ export function UpdateTeacher() {
 
   return(
     <>
-      <ContainerCreateTeacher className="container">
-        <div>
-          <div className="title">
-            <h1>Atualização de Dados</h1>
-          </div>
-
-          <form action="" onSubmit={handleSubmit}>
-
-            <div className="forms">
-              <label htmlFor="fullName">Nome Completo</label>
-              <input type="text" name="fullName" id="fullName" value={fullName} onChange={handleFullName} required/>
+      {
+        login ? (
+          <ContainerCreateTeacher className="container">
+            <div>
+              <div className="title">
+                <h1>Atualização de Dados</h1>
+              </div>
+    
+              <form action="" onSubmit={handleSubmit}>
+    
+                <div className="forms">
+                  <label htmlFor="fullName">Nome Completo</label>
+                  <input type="text" name="fullName" id="fullName" value={fullName} onChange={handleFullName} required/>
+                </div>
+    
+                <div className="images">
+                  <label htmlFor="image">Imagem</label>
+                  <input type="file" name="image" id="image" onChange={handleImage} />
+                </div>
+    
+                <div className="forms">
+                  <label htmlFor="category">Cursos</label>
+                  
+                  <select name="select" value={selectedCourses} onChange={handleCourses} required>
+                  <option value="">Selecione uma opção</option>
+                    <option value="Administração">Administração</option>
+                    <option value="Biologia">Biologia</option>
+                    <option value="Enfermagem">Enfermagem</option>
+                    <option value="História">História</option>
+                    <option value="Medicina">Medicina</option>
+                    <option value="Nutrição">Nutrição</option>                
+                    <option value="Sistema de Informação">Sistema de Informação</option> 
+                  </select>
+                </div>
+    
+                <div className="forms">
+                  <label htmlFor="email">Email</label>
+                  <input type="text" name="email" id="email" value={email} onChange={handleEmail} required/>
+                </div>
+    
+                {
+                  loading ? (
+                    <Button disabled className="ButtoNews">Carregando...</Button>
+                  ) : (
+                    <Button className="ButtoNews">Enviar</Button>
+                  )
+                }
+              </form>
             </div>
-
-            <div className="images">
-              <label htmlFor="image">Imagem</label>
-              <input type="file" name="image" id="image" onChange={handleImage} />
-            </div>
-
-            <div className="forms">
-              <label htmlFor="category">Cursos</label>
-              
-              <select name="select" value={selectedCourses} onChange={handleCourses} required>
-              <option value="">Selecione uma opção</option>
-                <option value="Administração">Administração</option>
-                <option value="Biologia">Biologia</option>
-                <option value="Enfermagem">Enfermagem</option>
-                <option value="História">História</option>
-                <option value="Medicina">Medicina</option>
-                <option value="Nutrição">Nutrição</option>                
-                <option value="Sistema de Informação">Sistema de Informação</option> 
-              </select>
-            </div>
-
-            <div className="forms">
-              <label htmlFor="email">Email</label>
-              <input type="text" name="email" id="email" value={email} onChange={handleEmail} required/>
-            </div>
-
-            {
-              loading ? (
-                <Button disabled className="ButtoNews">Carregando...</Button>
-              ) : (
-                <Button className="ButtoNews">Enviar</Button>
-              )
-            }
-          </form>
-        </div>
-      </ContainerCreateTeacher>
+          </ContainerCreateTeacher>
+         ):(
+          <NotLogin />
+        )
+      }
     </>
   )
 }

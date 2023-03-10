@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { ContainerUpdateProject } from "./styles";
 import { Button } from "../../../Login/components/components/Button/Button"
+import { UserContext } from "../../../../context/UserContext";
+import { NotLogin } from "../../../../components/NotLogin/NotLogin";
 
 
 export function UpdateProject(){
+  const {login} = useContext(UserContext)
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
   const [title, setTitle] = useState('')
@@ -114,72 +117,80 @@ export function UpdateProject(){
 
 
   return (
-    <ContainerUpdateProject className="container">
-      <div>
-        <div className="title">
-          <h1>Projeto</h1>
-        </div>
-
-        <form action="" onSubmit={handleSubmit}>
-
-          <div className="titleProject">
-            <label htmlFor="title">Título</label>
-            <input type="text" name="title" id="title" value={title} onChange={handleTitle}/>
-          </div>
-
-          <div>
-            <label htmlFor="category">Categoria</label>
-            <div className="categoryItems">
-              <div className="categoryItem">
-                <input type="radio" name="category"  id="category" value="Pesquisa"  checked={selectedOption === 'Pesquisa'} onChange={handleOptionChange}/>
-                <p>Pesquisa</p>
+    <>
+      {
+        login ? (
+          <ContainerUpdateProject className="container">
+            <div>
+              <div className="title">
+                <h1>Projeto</h1>
               </div>
-
-              <div className="categoryItem">
-                <input type="radio" name="category"  id="category" value="Desenvolvimento tecnológico" checked={selectedOption === 'Desenvolvimento tecnológico'} onChange={handleOptionChange}/>
-                <p>Desenvolvimento tecnológico</p>
-              </div>
-
-              <div className="categoryItem">
-                <input type="radio" name="category"  id="category" value="Extersão" checked={selectedOption === 'Extersão'} onChange={handleOptionChange}/>
-                <p>Extersão</p>
-              </div>
+      
+              <form action="" onSubmit={handleSubmit}>
+      
+                <div className="titleProject">
+                  <label htmlFor="title">Título</label>
+                  <input type="text" name="title" id="title" value={title} onChange={handleTitle}/>
+                </div>
+      
+                <div>
+                  <label htmlFor="category">Categoria</label>
+                  <div className="categoryItems">
+                    <div className="categoryItem">
+                      <input type="radio" name="category"  id="category" value="Pesquisa"  checked={selectedOption === 'Pesquisa'} onChange={handleOptionChange}/>
+                      <p>Pesquisa</p>
+                    </div>
+      
+                    <div className="categoryItem">
+                      <input type="radio" name="category"  id="category" value="Desenvolvimento tecnológico" checked={selectedOption === 'Desenvolvimento tecnológico'} onChange={handleOptionChange}/>
+                      <p>Desenvolvimento tecnológico</p>
+                    </div>
+      
+                    <div className="categoryItem">
+                      <input type="radio" name="category"  id="category" value="Extersão" checked={selectedOption === 'Extersão'} onChange={handleOptionChange}/>
+                      <p>Extersão</p>
+                    </div>
+                  </div>
+                </div>
+      
+                <div className="teacherStudent">
+                  <label htmlFor="category">Professores</label>
+                  
+                  <select value={selectedOptionsTeachers} onChange={handleTeachers} name="select" multiple>
+                    {teacher && teacher.map((item) => <option key={item.id} value={item.id}>{item.fullName}</option>)}
+                  </select>
+                </div>
+      
+                <div className="teacherStudent">
+                  <label htmlFor="category">Alunos</label>
+                  
+                  <select name="select" value={selectedOptionsStudent} onChange={handleStudent} multiple>
+      
+                    {student && student.map((item) => <option key={item.id} value={item.id}>{item.fullName}</option>)}
+                  </select>
+                </div>
+                
+                
+                <div className="descriptions">
+                  <label htmlFor="description">Descrição</label>
+                  <textarea name="description" id="description" cols="30" rows="10" onChange={handleDescription} value={description} required></textarea>
+                </div> 
+      
+                
+                {
+                  loading ? (
+                    <Button disabled className="ButtoNews">Carregando...</Button>
+                  ) : (
+                    <Button className="ButtoNews">Enviar</Button>
+                  )
+                }
+              </form>
             </div>
-          </div>
-
-          <div className="teacherStudent">
-            <label htmlFor="category">Professores</label>
-            
-            <select value={selectedOptionsTeachers} onChange={handleTeachers} name="select" multiple>
-              {teacher && teacher.map((item) => <option key={item.id} value={item.id}>{item.fullName}</option>)}
-            </select>
-          </div>
-
-          <div className="teacherStudent">
-            <label htmlFor="category">Alunos</label>
-            
-            <select name="select" value={selectedOptionsStudent} onChange={handleStudent} multiple>
-
-              {student && student.map((item) => <option key={item.id} value={item.id}>{item.fullName}</option>)}
-            </select>
-          </div>
-          
-          
-          <div className="descriptions">
-            <label htmlFor="description">Descrição</label>
-            <textarea name="description" id="description" cols="30" rows="10" onChange={handleDescription} value={description} required></textarea>
-          </div> 
-
-          
-          {
-            loading ? (
-              <Button disabled className="ButtoNews">Carregando...</Button>
-            ) : (
-              <Button className="ButtoNews">Enviar</Button>
-            )
-          }
-        </form>
-      </div>
-    </ ContainerUpdateProject>
+          </ ContainerUpdateProject>
+        ): (
+          <NotLogin />
+        )
+      }
+    </>
   )
 }

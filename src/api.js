@@ -1,5 +1,5 @@
-export const API_URL = 'https://api-paadupfi.onrender.com/'
-// export const API_URL = 'http://localhost:3000/'
+// export const API_URL = 'https://api-paadupfi.onrender.com/'
+export const API_URL = 'http://localhost:3000/'
 
 // Nós adicionamos aqui as configurações
 export function TOKEN_POST(body) {

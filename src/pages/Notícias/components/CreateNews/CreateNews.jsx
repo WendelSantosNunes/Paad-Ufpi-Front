@@ -7,6 +7,7 @@ import axios from "axios";
 import { CreateNewsContainer } from "./styles";
 import { useNavigate} from "react-router-dom";
 import { UserContext } from "../../../../context/UserContext";
+import { NotLogin } from "../../../../components/NotLogin/NotLogin";
 
 export function CreaterNews() {
   const title = useForm()
@@ -54,10 +55,6 @@ export function CreaterNews() {
       formData.append('title', title.value)
       formData.append('description', value)
       formData.append('file', image)
-
-      // if(title.value !== '' || value !== '' || image !== ''){
-      //   return "Error"
-      // }
     
       const token = window.localStorage.getItem('Token')
 
@@ -108,9 +105,7 @@ export function CreaterNews() {
             </div>
           </CreateNewsContainer>
         ) : (
-          <section className="container">
-            <h1>Oi</h1>
-          </section>
+          <NotLogin />
         )
       }
     </>

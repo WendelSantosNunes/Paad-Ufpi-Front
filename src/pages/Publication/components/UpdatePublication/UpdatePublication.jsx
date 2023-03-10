@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { Button } from "../../../Login/components/components/Button/Button"
 import { ContainerCreatePublication } from "./styles"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../../context/UserContext";
+import { NotLogin } from "../../../../components/NotLogin/NotLogin";
 
 export function UpdatePubliation(){
+  const {login} = useContext(UserContext)
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
   const [linkPublication, setLinkPublication] = useState('')
@@ -31,11 +34,9 @@ export function UpdatePubliation(){
    
   }
 
-
   useEffect(() => {
     fetchData();
   },[])
-
 
   async function handleSubmit(event){
     event.preventDefault()
@@ -70,34 +71,41 @@ export function UpdatePubliation(){
 
   return(
     <>
-      <ContainerCreatePublication className="container">
-        <div>
-          <div className="title">
-            <h1>Notícia</h1>
-          </div>
+      {
+         login ? (
+          <ContainerCreatePublication className="container">
+            <div>
+              <div className="title">
+                <h1>Notícia</h1>
+              </div>
 
-          <form action="" onSubmit={handleSubmit}>
+              <form action="" onSubmit={handleSubmit}>
 
-            <div className="descriptions">
-              <label htmlFor="description">Descrição</label>
-              <textarea name="description" id="description" cols="30" rows="10" onChange={handleDescription}  value={description} required></textarea>
-            </div> 
+                <div className="descriptions">
+                  <label htmlFor="description">Descrição</label>
+                  <textarea name="description" id="description" cols="30" rows="10" onChange={handleDescription}  value={description} required></textarea>
+                </div> 
 
-            <div className="link">
-              <label htmlFor="link">Link</label>
-              <input type="text" name="link"  id="link" onChange={handleLink} value={linkPublication} required/>
+                <div className="link">
+                  <label htmlFor="link">Link</label>
+                  <input type="text" name="link"  id="link" onChange={handleLink} value={linkPublication} required/>
+                </div>
+                
+                {
+                  loading ? (
+                    <Button disabled className="ButtoNews">Carregando...</Button>
+                  ) : (
+                    <Button className="ButtoNews">Atualizar</Button>
+                  )
+                }
+              </form>
             </div>
-            
-            {
-              loading ? (
-                <Button disabled className="ButtoNews">Carregando...</Button>
-              ) : (
-                <Button className="ButtoNews">Atualizar</Button>
-              )
-            }
-          </form>
-        </div>
-      </ContainerCreatePublication>
+          </ContainerCreatePublication>
+         ): (
+          <NotLogin />
+         )
+      }
+      
     </>
   )
 }

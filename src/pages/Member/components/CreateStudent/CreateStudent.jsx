@@ -1,10 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { Button } from "../Button/Button";
 import { ContainerCreateStudent } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { NotLogin } from "../../../../components/NotLogin/NotLogin";
+import { UserContext } from "../../../../context/UserContext";
 
 export function CreateStudent() {
+  const {login} = useContext(UserContext)
   const [loading, setLoading] = useState(false)
   const [fullName, setFullName] = useState('')
   const [image, setImage] = useState('')
@@ -109,67 +112,77 @@ export function CreateStudent() {
   }
 
   return(
-    <ContainerCreateStudent className="container">
-      <div>
-        <div className="title">
-          <h1>Estudante</h1>
-        </div>
+   
 
-        <form action="" onSubmit={handleSubmit}>
-
-          <div className="forms">
-            <label htmlFor="fullName">Nome</label>
-              <input type="text" name="fullName" id="fullName" value={fullName} onChange={handleFullName} required/>
-          </div>
-
-          <div className="images">
-            <label htmlFor="image">Imagem</label>
-              <input type="file" name="image" id="image" onChange={handleImage} required />
-          </div>
-
-          <div className="forms">
-            <label htmlFor="category">Cursos</label>
-              
-            <select name="select" value={selectedCourses} onChange={handleCourses} required>
-            <option value="">Selecione uma opção</option>
-              <option value="Administração">Administração</option>
-              <option value="Biologia">Biologia</option>
-              <option value="Enfermagem">Enfermagem</option>
-              <option value="História">História</option>
-              <option value="Medicina">Medicina</option>
-              <option value="Nutrição">Nutrição</option>                
-              <option value="Sistema de Informação">Sistema de Informação</option> 
-            </select>
-
+   <>
+     {
+      login ? (
+        <ContainerCreateStudent className="container">
+          <div>
+            <div className="title">
+              <h1>Estudante</h1>
             </div>
-
-          <div className="forms">
-            <label htmlFor="category">Teacher</label>
-              
-              <select value={selectedTeacher} onChange={handleTeacher} name="select" required>
+    
+            <form action="" onSubmit={handleSubmit}>
+    
+              <div className="forms">
+                <label htmlFor="fullName">Nome</label>
+                  <input type="text" name="fullName" id="fullName" value={fullName} onChange={handleFullName} required/>
+              </div>
+    
+              <div className="images">
+                <label htmlFor="image">Imagem</label>
+                  <input type="file" name="image" id="image" onChange={handleImage} required />
+              </div>
+    
+              <div className="forms">
+                <label htmlFor="category">Cursos</label>
+                  
+                <select name="select" value={selectedCourses} onChange={handleCourses} required>
                 <option value="">Selecione uma opção</option>
-
-                {teacher && teacher.map((item) => <option key={item.id} value={item.id}>{item.fullName}</option>)}
-              </select>
+                  <option value="Administração">Administração</option>
+                  <option value="Biologia">Biologia</option>
+                  <option value="Enfermagem">Enfermagem</option>
+                  <option value="História">História</option>
+                  <option value="Medicina">Medicina</option>
+                  <option value="Nutrição">Nutrição</option>                
+                  <option value="Sistema de Informação">Sistema de Informação</option> 
+                </select>
+    
+                </div>
+    
+              <div className="forms">
+                <label htmlFor="category">Teacher</label>
+                  
+                  <select value={selectedTeacher} onChange={handleTeacher} name="select" required>
+                    <option value="">Selecione uma opção</option>
+    
+                    {teacher && teacher.map((item) => <option key={item.id} value={item.id}>{item.fullName}</option>)}
+                  </select>
+              </div>
+    
+    
+              <div className="forms">
+                <label htmlFor="email">Email</label>
+                  <input type="text" name="email" id="email" onChange={handleEmail} required/>
+              </div>
+    
+              {
+                loading ? (
+                  <Button disabled className="ButtoNews">Carregando...</Button>
+                ) : (
+                  <Button className="ButtoNews">Enviar</Button>
+                )
+              }
+    
+            </form>
           </div>
-
-
-          <div className="forms">
-            <label htmlFor="email">Email</label>
-              <input type="text" name="email" id="email" onChange={handleEmail} required/>
-          </div>
-
-          {
-            loading ? (
-              <Button disabled className="ButtoNews">Carregando...</Button>
-            ) : (
-              <Button className="ButtoNews">Enviar</Button>
-            )
-          }
-
-        </form>
-      </div>
-    </ContainerCreateStudent>
+        </ContainerCreateStudent>
+      ):(
+        <NotLogin />
+      )
+    }
+   </>
   )
 
 }

@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button } from "../../../Login/components/components/Button/Button"
 import { CreateNewsContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { NotLogin } from "../../../../components/NotLogin/NotLogin";
+import { UserContext } from "../../../../context/UserContext";
 
 export function UpdateNews() {
-  // const title = useForm()
+  const {login} = useContext(UserContext)
   const [value, setValue] = useState('')
   const [image, setImage] = useState('')
   const [title, setTitle] = useState('')
@@ -75,23 +77,17 @@ export function UpdateNews() {
 
       console.log(title, value, image)
 
-
       formData.append('title', title)
       formData.append('description', value)
       formData.append('file', image)
 
-      // if(title.value !== '' || value !== '' || image !== ''){
-      //   return "Error"
-      // }
       const token = window.localStorage.getItem('Token')
 
-      const response = await axios.patch('https://api-paadupfi.onrender.com/news/' + key, formData, {
+      await axios.patch('https://api-paadupfi.onrender.com/news/' + key, formData, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
-
-      console.log(response)
 
       setLoading(false)
       navigate('/news')
@@ -108,6 +104,7 @@ export function UpdateNews() {
     <>
 
     {
+      login ? (
       !data ? (
         <>
           <CreateNewsContainer className="container">
@@ -145,8 +142,10 @@ export function UpdateNews() {
         </>
       ) : (
         <>
-        
+          Conteúdo não encontrado!
         </>
+      )):(
+        <NotLogin />
       )
     }
 

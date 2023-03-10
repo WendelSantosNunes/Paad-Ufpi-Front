@@ -4,6 +4,9 @@ export const ContainerUpdateProject = styled.section`
   background-color: #222831;
 
   border-radius: 0.7rem;
+  
+  flex-grow: 1;
+  min-height: 31.25rem;
 
   > div{
 

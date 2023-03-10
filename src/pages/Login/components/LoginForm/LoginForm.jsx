@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import { useForm } from "../../../../Hooks/useForm";
 import { useContext } from "react";
 import { UserContext } from "../../../../context/UserContext";
+import { NotLogin } from "../../../../components/NotLogin/NotLogin";
 
 export function LoginForm() {
-
     const email = useForm('email')
     const password = useForm()
-    const {userLogin, error, loading} = useContext(UserContext)    
+    const {userLogin, error, loading, login} = useContext(UserContext)    
     
     async function handleSubmit(event){
         event.preventDefault()
@@ -22,39 +22,44 @@ export function LoginForm() {
         }
     }
 
-
     return (
         <>
-            <section className="container" onSubmit={handleSubmit}>
-                <LoginStyle>
-                    <div className="containerForm">
-                        <div>
-                            <h2>Bem vindo de volta</h2>
-                            <h1>Faça login na sua conta</h1>
+            {
+                login ? (
+                    <NotLogin />
+                ) : (
+                    <section className="container" onSubmit={handleSubmit}>
+                        <LoginStyle>
+                            <div className="containerForm">
+                                <div>
+                                    <h2>Bem vindo de volta</h2>
+                                    <h1>Faça login na sua conta</h1>
 
-                            <form action="">
-                                <Input label="Email" type="text" name="email" {...email}/>
-                                <Input label="Senha" type="password" name="password" {...password}/>
-                                {error && <p className="error">{error}</p>}
+                                    <form action="">
+                                        <Input label="Email" type="text" name="email" {...email}/>
+                                        <Input label="Senha" type="password" name="password" {...password}/>
+                                        {error && <p className="error">{error}</p>}
 
-                                <div className="linkPassword">
-                                    <Link to='password'>Esqueceu sua senha? </Link>
+                                        <div className="linkPassword">
+                                            <Link to='password'>Esqueceu sua senha? </Link>
+                                        </div>
+                                        {
+                                            loading ? (
+                                                <Button disabled>Carregando...</Button>
+                                            ) : (
+                                                <Button>Entrar</Button>
+                                            )
+                                        }
+                                    </form>
                                 </div>
-                                {
-                                    loading ? (
-                                        <Button disabled>Carregando...</Button>
-                                    ) : (
-                                        <Button>Entrar</Button>
-                                    )
-                                }
-                            </form>
-                        </div>
-                    </div>
-                    <div className="image">
-                        <img src={Login1} alt="Imagem ilustrativa" />
-                    </div>
-                </LoginStyle>
-            </section>
+                            </div>
+                            <div className="image">
+                                <img src={Login1} alt="Imagem ilustrativa" />
+                            </div>
+                        </LoginStyle>'
+                    </section>   
+                )
+            }
         </>
     )
 }

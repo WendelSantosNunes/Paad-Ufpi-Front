@@ -6,6 +6,7 @@ export const CreateNewsContainer = styled.div`
 
   flex-grow: 1;
   min-height: 31.25rem;
+  
   > div{
     margin: 3rem auto;  
     

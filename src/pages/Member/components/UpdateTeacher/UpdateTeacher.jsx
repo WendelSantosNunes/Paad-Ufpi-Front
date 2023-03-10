@@ -11,6 +11,7 @@ export function UpdateTeacher() {
   const [fullName, setFullName] = useState('')
   const [image, setImage] = useState('')
   const [email, setEmail] = useState('')
+  const [haveImage, setHaveImage] = useState(0)
   const [students, setStudent] = useState([])
   const [teacher, setTeacher] = useState()
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ export function UpdateTeacher() {
     const formData = new FormData()
 
     const token = window.localStorage.getItem('Token')
+    let response 
 
     formData.append('course', selectedCourses)
     formData.append('email', email)
@@ -35,14 +37,28 @@ export function UpdateTeacher() {
     formData.append('fullName', fullName)
     formData.append('students', students)
 
-
     try {
-      let response = await axios.patch('https://api-paadupfi.onrender.com/teacher/' + key, formData, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        }
-      })
+      if(haveImage == 1){
+        response = await axios.patch('https://api-paadupfi.onrender.com/teacher/' + key, formData, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          }
+        })
+      }else{
+        response = await axios.patch('https://api-paadupfi.onrender.com/teacher/update/' + key, {
+          course: selectedCourses,
+          email: email,
+          image: image,
+          fullName: fullName,
+          students: students 
+        }, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          }
+        })
+      }
 
+      console.log(response)
       setLoading(false)
       navigate('/member')
     }catch(error){
@@ -75,6 +91,7 @@ export function UpdateTeacher() {
     }
   
     setImage(file)
+    setHaveImage(1)
   }
 
   function handleCourses({target}){

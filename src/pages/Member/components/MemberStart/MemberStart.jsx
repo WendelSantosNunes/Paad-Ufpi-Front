@@ -14,7 +14,7 @@ export function MemberStar(){
   async function dataStudent(){
     try {
       let response = await axios.get(`https://api-paadupfi.onrender.com/student/?limit=${35}&offset=${0}`)
-
+      console.log(response)
       setStudent(response.data.results)
     } catch (error) {
       console.log(error)
@@ -36,20 +36,19 @@ export function MemberStar(){
     const token = window.localStorage.getItem('Token')
     
     try {     
-      let response = await axios.delete(`https://api-paadupfi.onrender.com/student/${student}`, {
+      await axios.delete(`https://api-paadupfi.onrender.com/student/${student}`, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
 
-      let response1 = await axios.patch('https://api-paadupfi.onrender.com/teacher/remover/student', {student:student, id: teacher }, {
+      await axios.patch('https://api-paadupfi.onrender.com/teacher/remover/student', {student:student, id: teacher }, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
-
-      console.log(response1)
-      navigate('/member')
+      console.log("oi")
+      dataStudent()
     } catch (error) {
       console.log(error) 
     }
@@ -75,7 +74,7 @@ export function MemberStar(){
       })
 
       console.log(response)
-      navigate('member/')
+      navigate('/member')
     } catch (error) {
       console.log(error) 
     }

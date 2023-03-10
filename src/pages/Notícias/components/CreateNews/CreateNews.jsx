@@ -1,14 +1,16 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useForm } from "../../../../Hooks/useForm"
 import {Input} from "../Input/Input"
 import {Button} from "../../../Login/components/components/Button/Button"
 
 import axios from "axios";
 import { CreateNewsContainer } from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import { UserContext } from "../../../../context/UserContext";
 
 export function CreaterNews() {
   const title = useForm()
+  const {login} = useContext(UserContext)
   const [value, setValue] = useState('')
   const [image, setImage] = useState('')
   const [loading, setLoading] = useState(false)
@@ -74,35 +76,44 @@ export function CreaterNews() {
   }
 
   return (
-    <>
-      <CreateNewsContainer className="container">
-        <div>
-          <div className="title">
-            <h1>Notícia</h1>
-          </div>
-
-          <form action="" onSubmit={handleSubmit}>
-            <Input label="Título" type="text" name="title" id="title" {...title} required/>
-
-            <div className="images">
-              <label htmlFor="image">Imagem</label>
-              <input type="file" name="image" id="image" onChange={newImg} required />
+    <>   
+      {
+        login ? (
+          <CreateNewsContainer className="container">
+            <div>
+              <div className="title">
+                <h1>Notícia</h1>
+              </div>
+    
+              <form action="" onSubmit={handleSubmit}>
+                <Input label="Título" type="text" name="title" id="title" {...title} required/>
+    
+                <div className="images">
+                  <label htmlFor="image">Imagem</label>
+                  <input type="file" name="image" id="image" onChange={newImg} required />
+                </div>
+    
+                <div className="descriptions">
+                  <label htmlFor="description">Descrição</label>
+                  <textarea name="description" id="description" cols="30" rows="10"  value={value} onChange={newValue} required></textarea>
+                </div>
+                {
+                  loading ? (
+                    <Button disabled className="ButtoNews">Carregando...</Button>
+                  ) : (
+                    <Button className="ButtoNews">Enviar</Button>
+                  )
+                }
+              </form>
             </div>
-
-            <div className="descriptions">
-              <label htmlFor="description">Descrição</label>
-              <textarea name="description" id="description" cols="30" rows="10"  value={value} onChange={newValue} required></textarea>
-            </div>
-            {
-              loading ? (
-                <Button disabled className="ButtoNews">Carregando...</Button>
-              ) : (
-                <Button className="ButtoNews">Enviar</Button>
-              )
-            }
-          </form>
-        </div>
-      </CreateNewsContainer>
+          </CreateNewsContainer>
+        ) : (
+          <section className="container">
+            <h1>Oi</h1>
+          </section>
+        )
+      }
     </>
   )
+  
 }

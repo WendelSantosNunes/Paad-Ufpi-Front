@@ -11,6 +11,7 @@ export function CreateStudent() {
   const [selectedCourses, setSelectedCourses] = useState('');
   const [selectedTeacher, setSelectedTeacher] = useState('');
   const [teacher, setTeacher] = useState([]);
+  const [error, setError] = useState(false)
   const [email, setEmail] = useState('')
   const navigate = useNavigate()
 
@@ -104,10 +105,7 @@ export function CreateStudent() {
         setLoading(false)
       }
 
-      setLoading(false)
     }
-
-
   }
 
   return(
@@ -120,7 +118,7 @@ export function CreateStudent() {
         <form action="" onSubmit={handleSubmit}>
 
           <div className="forms">
-            <label htmlFor="fullName">Nome Completo</label>
+            <label htmlFor="fullName">Nome</label>
               <input type="text" name="fullName" id="fullName" value={fullName} onChange={handleFullName} required/>
           </div>
 
@@ -148,7 +146,7 @@ export function CreateStudent() {
           <div className="forms">
             <label htmlFor="category">Teacher</label>
               
-              <select value={selectedTeacher} onChange={handleTeacher} name="select">
+              <select value={selectedTeacher} onChange={handleTeacher} name="select" required>
                 <option value="">Selecione uma opção</option>
 
                 {teacher && teacher.map((item) => <option key={item.id} value={item.id}>{item.fullName}</option>)}

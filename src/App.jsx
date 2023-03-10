@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { Footer } from "./components/Footer/Footer"
 import { Header } from "./components/Header/Header"
 import { GlobalStyles } from "./styles/GlobalStyled"
@@ -10,6 +10,7 @@ import { Noticias } from "./pages/Notícias/Noticias"
 import { Publicaction } from "./pages/Publication/Publication"
 import { Project } from "./pages/Project/Project"
 import { Member } from "./pages/Member/Member"
+import { NotFound } from "./pages/NotFoud/NotFound"
 
 
 export function App() {
@@ -28,6 +29,8 @@ export function App() {
             <Route path="/publication/*" element={<Publicaction />} />
             <Route path="/project/*" element={<Project />} />
             <Route path="/member/*" element={<Member />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<Navigate to='/404' />} />
           </Routes>
           <Footer />
         </UserStorage>

@@ -33,22 +33,22 @@ export function CreateTeacher() {
     if(selectedOptionsStudent != [])
       formData.append('students', selectedOptionsStudent)
 
-    try {
-      let response = await axios.post('https://api-paadupfi.onrender.com/teacher/', formData, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        }
-      })
+    if(fullName != '' && image != '' && selectedCourses != '' && email != ''){
+      try {
+        let response = await axios.post('https://api-paadupfi.onrender.com/teacher/', formData, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          }
+        })
 
-      setLoading(false)
-      navigate('/member')
+        setLoading(false)
+        navigate('/member')
 
-    }catch(error){
-      console.log(error)
-      setLoading(false)
+      }catch(error){
+        console.log(error)
+        setLoading(false)
+      }
     }
-    // console.log( student, selectedCourses,selectedOptionsStudent, email)
-
   }
 
   function handleFullName({target}){

@@ -8,6 +8,7 @@ export function UpdateStudent(){
   const [loading, setLoading] = useState(false)
   const [fullName, setFullName] = useState('')
   const [image, setImage] = useState('')
+  const [haveImage, setHaveImage] = useState(0)
   const [selectedCourses, setSelectedCourses] = useState('');
   const [selectedTeacher, setSelectedTeacher] = useState('');
   const [teacher, setTeacher] = useState([]);
@@ -42,6 +43,7 @@ export function UpdateStudent(){
     }
   
     setImage(file)
+    setHaveImage(1)
   }
 
   function handleCourses({target}){
@@ -106,12 +108,26 @@ export function UpdateStudent(){
           }
         })
 
-        await axios.patch('https://api-paadupfi.onrender.com/student/' + key, formData, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          }
-        })
-  
+        if(haveImage == 1){
+          await axios.patch('https://api-paadupfi.onrender.com/student/' + key, formData, {
+            headers: {
+              Authorization: 'Bearer ' + token,
+            }
+          })
+        }else{
+           await axios.patch('https://api-paadupfi.onrender.com/update/' + key, {
+            course: selectedCourses,
+            email: email,
+            image: image,
+            fullName: fullName,
+            teacher: selectedTeacher 
+          }, {
+            headers: {
+              Authorization: 'Bearer ' + token,
+            }
+          })
+        }
+
         let id = selectedTeacher
         let student = key
 
@@ -149,7 +165,7 @@ export function UpdateStudent(){
 
           <div className="images">
             <label htmlFor="image">Imagem</label>
-              <input type="file" name="image" id="image" onChange={handleImage} required />
+              <input type="file" name="image" id="image" onChange={handleImage} />
           </div>
 
           <div className="forms">
@@ -171,7 +187,7 @@ export function UpdateStudent(){
           <div className="forms">
             <label htmlFor="category">Teacher</label>
               
-              <select value={selectedTeacher} onChange={handleTeacher} name="select">
+              <select value={selectedTeacher} onChange={handleTeacher} name="select" required>
                 <option value="">Selecione uma opção</option>
 
                 {teacher && teacher.map((item) => <option key={item.id} value={item.id}>{item.fullName}</option>)}

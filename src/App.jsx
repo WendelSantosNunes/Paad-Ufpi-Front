@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes, useRoutes,  } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes  } from "react-router-dom"
 import { Footer } from "./components/Footer/Footer"
 import { Header } from "./components/Header/Header"
 import { GlobalStyles } from "./styles/GlobalStyled"
@@ -25,7 +25,7 @@ export function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login/*" element={<Login />} />
               <Route path="/about" element={<Sobre />} />
-              <Route path="/news/*index.tsx:90 Uncaught Error: useRoutes() may be used only in the context of a <Router> component." element={<Noticias />} />
+              <Route path="/news/*" element={<Noticias />} />
               <Route path="/publication/*" element={<Publicaction />} />
               <Route path="/project/*" element={<Project />} />
               <Route path="/member/*" element={<Member />} />

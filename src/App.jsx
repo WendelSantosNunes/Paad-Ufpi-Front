@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes,  } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes, useRoutes,  } from "react-router-dom"
 import { Footer } from "./components/Footer/Footer"
 import { Header } from "./components/Header/Header"
 import { GlobalStyles } from "./styles/GlobalStyled"
@@ -14,6 +14,45 @@ import { NotFound } from "./pages/NotFoud/NotFound"
 
 
 export function App() {
+  const routes = useRoutes([
+    {
+      path: '/',
+      element: <Home />
+    },
+    {
+      path: '/login/*',
+      element: <Login />
+    },
+    {
+      path: '/about',
+      element: <Sobre />
+    },
+    {
+      path: '/news/*',
+      element: <Noticias /> 
+    },
+    {
+      path: '/publication/*',
+      element: <Publicaction />
+    },
+    {
+      path: '/project/*',
+      element: <Project />
+    },
+    {
+      path: '/member/*',
+      element: <Member />
+    },
+    {
+      path: '/404',
+      element: <NotFound />
+    },
+    {
+      path: '*',
+      element: <Navigate to='/404' />
+    }
+  ])
+
 
   return (
     <>
@@ -22,7 +61,7 @@ export function App() {
         <UserStorage>
           <Header />
           <Routes>
-              <Route exact path="/" element={<Home />} />
+              {/* <Route path="/" element={<Home />} />
               <Route path="/login/*" element={<Login />} />
               <Route path="/about" element={<Sobre />} />
               <Route path="/news/*" element={<Noticias />} />
@@ -30,7 +69,8 @@ export function App() {
               <Route path="/project/*" element={<Project />} />
               <Route path="/member/*" element={<Member />} />
               <Route path="/404" element={<NotFound />} />
-              <Route path="*" element={<Navigate to='/404' />} />
+              <Route path="*" element={<Navigate to='/404' />} /> */}
+              {routes}
           </Routes>
           <Footer />
         </UserStorage>

@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes, Switch } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes,  } from "react-router-dom"
 import { Footer } from "./components/Footer/Footer"
 import { Header } from "./components/Header/Header"
 import { GlobalStyles } from "./styles/GlobalStyled"
@@ -22,7 +22,6 @@ export function App() {
         <UserStorage>
           <Header />
           <Routes>
-            <Switch>
               <Route exact path="/" element={<Home />} />
               <Route path="/login/*" element={<Login />} />
               <Route path="/about" element={<Sobre />} />
@@ -32,7 +31,6 @@ export function App() {
               <Route path="/member/*" element={<Member />} />
               <Route path="/404" element={<NotFound />} />
               <Route path="*" element={<Navigate to='/404' />} />
-            </Switch>
           </Routes>
           <Footer />
         </UserStorage>

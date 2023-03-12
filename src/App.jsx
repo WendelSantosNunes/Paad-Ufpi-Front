@@ -30,7 +30,7 @@ export function App() {
             <Route path="/project/*" element={<Project />} />
             <Route path="/member/*" element={<Member />} />
             <Route path="/404" element={<NotFound />} />
-            {/* <Route path="*" element={<Navigate to='/404' />} /> */}
+            <Route path="*" element={<Navigate to='/404' />} />
           </Routes>
           <Footer />
         </UserStorage>

@@ -23,7 +23,7 @@ export function App() {
           <Header />
           <Routes>
             <Switch>
-              <Route path="/" element={<Home />} />
+              <Route exact path="/" element={<Home />} />
               <Route path="/login/*" element={<Login />} />
               <Route path="/about" element={<Sobre />} />
               <Route path="/news/*" element={<Noticias />} />

@@ -14,45 +14,6 @@ import { NotFound } from "./pages/NotFoud/NotFound"
 
 
 export function App() {
-  const routes = useRoutes([
-    {
-      path: '/',
-      element: <Home />
-    },
-    {
-      path: '/login/*',
-      element: <Login />
-    },
-    {
-      path: '/about',
-      element: <Sobre />
-    },
-    {
-      path: '/news/*',
-      element: <Noticias /> 
-    },
-    {
-      path: '/publication/*',
-      element: <Publicaction />
-    },
-    {
-      path: '/project/*',
-      element: <Project />
-    },
-    {
-      path: '/member/*',
-      element: <Member />
-    },
-    {
-      path: '/404',
-      element: <NotFound />
-    },
-    {
-      path: '*',
-      element: <Navigate to='/404' />
-    }
-  ])
-
 
   return (
     <>
@@ -61,16 +22,15 @@ export function App() {
         <UserStorage>
           <Header />
           <Routes>
-              {/* <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/login/*" element={<Login />} />
               <Route path="/about" element={<Sobre />} />
-              <Route path="/news/*" element={<Noticias />} />
+              <Route path="/news/*index.tsx:90 Uncaught Error: useRoutes() may be used only in the context of a <Router> component." element={<Noticias />} />
               <Route path="/publication/*" element={<Publicaction />} />
               <Route path="/project/*" element={<Project />} />
               <Route path="/member/*" element={<Member />} />
               <Route path="/404" element={<NotFound />} />
-              <Route path="*" element={<Navigate to='/404' />} /> */}
-              {routes}
+              <Route path="*" element={<Navigate to='/404' />} />
           </Routes>
           <Footer />
         </UserStorage>

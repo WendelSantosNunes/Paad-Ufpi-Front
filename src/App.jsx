@@ -22,20 +22,21 @@ export function App() {
         <UserStorage>
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login/*" element={<Login />} />
-            <Route path="/about" element={<Sobre />} />
-            <Route path="/news/*" element={<Noticias />} />
-            <Route path="/publication/*" element={<Publicaction />} />
-            <Route path="/project/*" element={<Project />} />
-            <Route path="/member/*" element={<Member />} />
-            <Route path="/404" element={<NotFound />} />
-            <Route path="*" element={<Navigate to='/404' />} />
+            <Switch>
+              <Route path="/" element={<Home />} />
+              <Route path="/login/*" element={<Login />} />
+              <Route path="/about" element={<Sobre />} />
+              <Route path="/news/*" element={<Noticias />} />
+              <Route path="/publication/*" element={<Publicaction />} />
+              <Route path="/project/*" element={<Project />} />
+              <Route path="/member/*" element={<Member />} />
+              <Route path="/404" element={<NotFound />} />
+              <Route path="*" element={<Navigate to='/404' />} />
+            </Switch>
           </Routes>
           <Footer />
         </UserStorage>
       </BrowserRouter>
     </>
-
   )
 }

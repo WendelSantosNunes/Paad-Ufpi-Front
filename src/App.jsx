@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes, Switch } from "react-router-dom"
 import { Footer } from "./components/Footer/Footer"
 import { Header } from "./components/Header/Header"
 import { GlobalStyles } from "./styles/GlobalStyled"

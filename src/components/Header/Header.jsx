@@ -12,7 +12,6 @@ export function Header(){
 
     function handleMenuClick(event){
         event.preventDefault()
-        console.log("oi")
         setIsMenuOpen(!isMenuOpen);
     }
 

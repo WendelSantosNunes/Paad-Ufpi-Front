@@ -75,8 +75,6 @@ export function UpdateNews() {
       setLoading(true)
       const formData = new FormData()
 
-      console.log(title, value, image)
-
       formData.append('title', title)
       formData.append('description', value)
       formData.append('file', image)
@@ -97,8 +95,6 @@ export function UpdateNews() {
     }
   }
 
-
-  console.log(title)
 
   return (
     <>

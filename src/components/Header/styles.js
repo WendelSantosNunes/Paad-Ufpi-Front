@@ -41,61 +41,99 @@ export const SocialMedia = styled.div`
     }
 `
 
-export const Menu = styled.div`
-   div{ 
+export const Menu1 = styled.div`
+    .navbar{
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
         align-items: center;
-        padding: 0.5rem 0.5rem;
+        justify-content: space-between;
+        padding: 15px;
 
-        div{
-            padding: 0.5rem 0 0.25rem 0;
+        a {
+            text-decoration: none;
+            color: #eee;
+        }
+    }
+
+    .logo{
+        margin-right: 50px;
+    }
+
+    .list {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+    }
+
+    #toggler,
+    .navbar label {
+        display: none;
+    }
+
+    @media screen and (max-width: 670px){
+        .menu{
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
         }
 
-        nav{
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            a{
-                text-decoration: none;
-                color: #EEE;
-
-                font-size: 1.125rem;
-
-                :hover{
-                    font-size: 1.25rem;
-                }
-            }
-
-            button {
-                border: none;
-                border-radius: 20px;
-                color: #EEE;
-                background-color: #484B4D;
-
-                padding: 0.6rem 0.5rem;
-
-                font-size: 1.125rem;
-
-                cursor: pointer;
-
-                :hover {
-                    background-color: red;
-                }
-            }
-        }
-
-        .menuDiv {
+        .menuClose {
             display: none;
         }
 
-        @media (max-width: 41.6875rem){
-            .menus{
-                display: none;
+        .ri-menu-line{
+            color: #eee;
+        }
+
+        .list{
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .navbar label{
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        /* #toggler:checked ~ .menu{
+            max-height: 100%;
+        } */
+
+        .buttonClick {
+            color: #EEE;
+            padding: 0.6rem 0.5rem;
+            font-size: 1.125rem;
+            cursor: pointer;
+
+            :hover {
+                background-color: red;
             }
         }
 
-        @media (max-width: 18.75rem){
+        .menu{
+            max-height: 100%;
+        }
+
+        a{
+                padding: 0;
+                margin: 0;
+                color: #222831;
+            }
+            svg:hover{
+                color: #484B4D;
+            }
+    }
+
+    @media screen and (max-width: 265px){
+        .logo{
+            margin-right: 0;
+        }
+        
+        .navbar{
+            display: flex;
+            justify-content: center;
             flex-direction: column;
         }
     }

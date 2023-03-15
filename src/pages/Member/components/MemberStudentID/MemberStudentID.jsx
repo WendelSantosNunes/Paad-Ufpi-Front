@@ -17,8 +17,6 @@ export function MemberStudentID(){
     data()
   },[])
 
-  // console.log(student.teacher.fullName)
-
   return (
     <ContainerMemberStudentID className="container">
       <div className="title">

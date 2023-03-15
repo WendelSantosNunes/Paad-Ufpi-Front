@@ -57,7 +57,7 @@ export function MemberStar(){
     const token = window.localStorage.getItem('Token')
         
     try {     
-      let response = await axios.delete(`https://api-paadupfi.onrender.com/teacher/${teacher}`, {
+      await axios.delete(`https://api-paadupfi.onrender.com/teacher/${teacher}`, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
@@ -71,7 +71,6 @@ export function MemberStar(){
         })
       })
 
-      console.log(response)
       navigate('/member')
     } catch (error) {
       console.log(error) 

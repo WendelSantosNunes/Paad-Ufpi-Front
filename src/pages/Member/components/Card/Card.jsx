@@ -15,16 +15,6 @@ export function Card({name, image}){
           {description}
         </div> */}
       </div>
-
-      {/* { 
-        login && <>
-          <div className='option'>
-              <Link to='create-student/'>Editar</Link>
-
-              <Link to='create-student/'>Excluir</Link>
-          </div>
-        </>
-      } */}
     </CardStyle>
   )
 }

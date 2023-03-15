@@ -13,8 +13,6 @@ export function ProjectStart(){
   async function data(){
     const response = await axios.get('https://api-paadupfi.onrender.com/project/?'+`limit=${end}&offset=${start}`)
     
-    // const response = await axios.get('http://localhost:3000/project/?'+`limit=${end}&offset=${start}`)
-
     setResults(response.data.results)
   }
 
@@ -26,8 +24,6 @@ export function ProjectStart(){
     setEnd(start + 4)
   }
   
-  // console.log(results)
-
   return(
     <>
       <ContainerProject className="container">

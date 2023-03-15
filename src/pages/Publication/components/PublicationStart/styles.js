@@ -20,6 +20,9 @@ export const PublicationContainer = styled.section`
     p{
       line-height: 150%;
     }
+    a{
+      color: #222831;
+    }
   }
 
   .data{

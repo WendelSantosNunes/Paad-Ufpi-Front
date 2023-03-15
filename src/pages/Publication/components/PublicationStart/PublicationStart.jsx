@@ -60,7 +60,7 @@ export function PublicationStart(){
             if(key < end){ 
               return <div className="description" key={item.id}>
                   <p>
-                    {item.description}
+                    <a href={item.link} target="_blank">{item.description}</a>
                   </p>
               
                   <p className="data">

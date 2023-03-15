@@ -101,13 +101,12 @@ export function UpdateProject(){
     try {
       setLoading(true)
 
-      let response = await axios.patch('https://api-paadupfi.onrender.com/project/' + key, {title: title, description: description, category: selectedOption, teacher:selectedOptionsTeachers, student: selectedOptionsStudent}, {
+      await axios.patch('https://api-paadupfi.onrender.com/project/' + key, {title: title, description: description, category: selectedOption, teacher:selectedOptionsTeachers, student: selectedOptionsStudent}, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
       
-      console.log(response)
       setLoading(false)
       navigate('/project')
     } catch (error) {

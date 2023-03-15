@@ -15,10 +15,8 @@ export function LoginPasswordLost(){
         event.preventDefault()
 
         if(email.validate()){ 
-            console.log(email)
             const {url, options} = PASSWORD_LOST({email: email.value})
-            const json = await request(url, options)
-            console.log(json)
+            await request(url, options)
         }
     }
 

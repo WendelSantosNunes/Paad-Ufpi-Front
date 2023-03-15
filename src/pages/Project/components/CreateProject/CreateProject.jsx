@@ -29,13 +29,12 @@ export function CreateProject(){
     const token = window.localStorage.getItem('Token')
 
     try {
-      let response = await axios.post('https://api-paadupfi.onrender.com/project/', {title: title, description: description, category: selectedOption,teacher:selectedOptionsTeachers,student: selectedOptionsStudent}, {
+      await axios.post('https://api-paadupfi.onrender.com/project/', {title: title, description: description, category: selectedOption,teacher:selectedOptionsTeachers,student: selectedOptionsStudent}, {
         headers: {
           Authorization: 'Bearer ' + token,
         }
       })
       
-      console.log(response)
       setLoading(false)
       navigate('/project')
     } catch (error) {

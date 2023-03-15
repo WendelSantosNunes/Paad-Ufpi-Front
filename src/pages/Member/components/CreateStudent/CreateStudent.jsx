@@ -94,13 +94,12 @@ export function CreateStudent() {
         let id = response.data.student.teacher
         let student = response.data.student._id
 
-        let response1 = await axios.patch('https://api-paadupfi.onrender.com/teacher/add/student', {id, student}, {
+        await axios.patch('https://api-paadupfi.onrender.com/teacher/add/student', {id, student}, {
           headers: {
             Authorization: 'Bearer ' + token,
           }
         })
 
-        console.log(response1)
         setLoading(false)
         navigate('/member')
       }catch(error){

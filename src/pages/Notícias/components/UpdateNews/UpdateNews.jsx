@@ -106,7 +106,7 @@ export function UpdateNews() {
           <CreateNewsContainer className="container">
             <div>
               <div className="title">
-                <h1>Notícia</h1>
+                <h1>Publicação</h1>
               </div>
 
               <form action="" onSubmit={handleSubmit}>

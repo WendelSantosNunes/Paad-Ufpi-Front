@@ -14,7 +14,6 @@ export function MemberStar(){
   async function dataStudent(){
     try {
       let response = await axios.get(`https://api-paadupfi.onrender.com/student/?limit=${35}&offset=${0}`)
-      console.log(response)
       setStudent(response.data.results)
     } catch (error) {
       console.log(error)
@@ -47,7 +46,6 @@ export function MemberStar(){
           Authorization: 'Bearer ' + token,
         }
       })
-      console.log("oi")
       dataStudent()
     } catch (error) {
       console.log(error) 

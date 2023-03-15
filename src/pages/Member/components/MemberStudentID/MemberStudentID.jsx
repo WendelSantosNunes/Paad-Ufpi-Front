@@ -11,8 +11,6 @@ export function MemberStudentID(){
     let response = await axios.get(`https://api-paadupfi.onrender.com/student/${key}`)
 
     setStudent(response.data.student)
-
-    console.log(response)
   }
 
   useEffect(() => {

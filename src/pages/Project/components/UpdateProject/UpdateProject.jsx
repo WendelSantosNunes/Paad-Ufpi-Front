@@ -73,7 +73,6 @@ export function UpdateProject(){
     setSelectedOptionsTeachers(response.data.project.teacher)
     setSelectedOptionsStudent(response.data.project.student)
     setSelectedOption(response.data.project.category)
-    console.log(response)
   }
 
 

@@ -70,7 +70,7 @@ export const Menu1 = styled.div`
         display: none;
     }
 
-    @media screen and (max-width: 670px){
+    @media screen and (max-width: 744px){
         .menu{
             width: 100%;
             max-height: 0;

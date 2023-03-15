@@ -71,8 +71,6 @@ export function CreateStudent() {
     
     event.preventDefault()
 
-    console.log(fullName, image, selectedCourses, selectedTeacher, email)
-
     if(fullName != '' && image != '' && selectedCourses != '' && selectedTeacher != '' && email != '' ){
       const formData = new FormData()
 

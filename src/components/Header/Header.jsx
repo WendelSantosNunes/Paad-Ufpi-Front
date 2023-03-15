@@ -50,6 +50,7 @@ export function Header(){
                   <li onClick={handleMenuClick}><Link to='/about'>Sobre</Link></li>
                   <li onClick={handleMenuClick}><Link to='/news'>Notícias</Link></li>
                   <li onClick={handleMenuClick}><Link to='/publication'>Publicação</Link></li>
+                  <li onClick={handleMenuClick}><Link to='/project'>Projetos</Link></li>
                   <li onClick={handleMenuClick}><Link to='/member'>Membros</Link></li>
 
                   {data ? (

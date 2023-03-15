@@ -33,7 +33,6 @@ export function ProjectStart(){
         </div>
 
         { results && results.map((item) => {
-          console.log(item)
           return <div className="titleProject" key={item.id}>
             <Link to={"project-id/?key=" + item.id}>
               <h2>{item.title}</h2>

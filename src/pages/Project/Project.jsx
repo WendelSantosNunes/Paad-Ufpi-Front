@@ -13,9 +13,6 @@ export function Project(){
               <Route path="/create-project" element={<CreateProject />} />
               <Route path="/project-id/*" element={<ProjectID />} />
               <Route path="/project-update-id/*" element={<UpdateProject />} />  
-
-              {/* <Route path="/create-publication" element={<CreatePublication />} />
-              <Route path="/update-publication/*" element={<UpdatePubliation />} /> */}
           </Routes>
       </>
   )

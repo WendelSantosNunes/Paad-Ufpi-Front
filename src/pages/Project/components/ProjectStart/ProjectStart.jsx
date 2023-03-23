@@ -52,9 +52,11 @@ export function ProjectStart(){
         <div className='options'>
           {
             login && <>
-                <div>
-                  <Link to='create-project/'>Adicionar Projeto</Link>
-                </div>
+                <Link to='create-project/'>
+                  <div>
+                    Adicionar Projeto
+                   </div>
+                </Link>
             </>
           }
  

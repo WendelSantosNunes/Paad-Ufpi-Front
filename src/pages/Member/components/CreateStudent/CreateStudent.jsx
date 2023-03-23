@@ -27,19 +27,20 @@ export function CreateStudent() {
     const file = target.files[0]
 
     if (!file) {
-      console.log("Nenhum arquivo selecionado")
+      setError("Nenhum arquivo selecionado")
       return
     }
   
     if (file.size >  1024 * 1024 * 5) {
-      console.log("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
+      setError("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
       return
     }
   
     if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-      console.log("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
+      setError("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
       return
     }
+    setError('')
   
     setImage(file)
   }
@@ -71,7 +72,7 @@ export function CreateStudent() {
     
     event.preventDefault()
 
-    if(fullName != '' && image != '' && selectedCourses != '' && selectedTeacher != '' && email != '' ){
+    if(fullName != '' && image != '' && selectedCourses != '' && selectedTeacher != '' && email != '' && error === ''){
       const formData = new FormData()
 
       const token = window.localStorage.getItem('Token')
@@ -85,7 +86,7 @@ export function CreateStudent() {
       try{
         let response = await axios.post('https://api-paadupfi.onrender.com/student/', formData, {
           headers: {
-            Authorization: 'Bearer ' + token,
+              Authorization: 'Bearer ' + token,
           }
         })
 
@@ -104,8 +105,8 @@ export function CreateStudent() {
         console.log(error)
         setLoading(false)
       }
-
     }
+    setLoading(false)
   }
 
   return(
@@ -130,6 +131,8 @@ export function CreateStudent() {
               <div className="images">
                 <label htmlFor="image">Imagem</label>
                   <input type="file" name="image" id="image" onChange={handleImage} required />
+
+                  <p className="error">{error}</p>
               </div>
     
               <div className="forms">

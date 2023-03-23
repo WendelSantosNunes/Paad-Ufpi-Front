@@ -15,6 +15,7 @@ export function CreaterNews() {
   const [value, setValue] = useState('')
   const [image, setImage] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const navigate = useNavigate()
 
   function newValue({target}){
@@ -26,20 +27,20 @@ export function CreaterNews() {
     const file = target.files[0]
 
     if (!file) {
-      console.log("Nenhum arquivo selecionado")
+      setError("Nenhum arquivo selecionado")
       return
     }
   
     if (file.size >  1024 * 1024 * 5) {
-      console.log("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
+      setError("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
       return
     }
   
     if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-      console.log("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
+      setError("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
       return
     }
-  
+    setError('')
     setImage(file)
   }
 
@@ -49,8 +50,7 @@ export function CreaterNews() {
       setLoading(true)
       const formData = new FormData()
 
-      console.log(title.value, value, image)
-
+      console.log('1',title.value, value, image)
 
       formData.append('title', title.value)
       formData.append('description', value)
@@ -58,14 +58,17 @@ export function CreaterNews() {
     
       const token = window.localStorage.getItem('Token')
 
-      const response = await axios.post('https://api-paadupfi.onrender.com/news', formData, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        }
-      })
-      
+      if(error === ''){
+        const response = await axios.post('https://api-paadupfi.onrender.com/news', formData, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          }
+        })
+        
+        setLoading(false)
+        navigate('/news')
+      }
       setLoading(false)
-      navigate('/news')
     } catch (error) {
       setLoading(false)
       console.log(error)
@@ -88,6 +91,8 @@ export function CreaterNews() {
                 <div className="images">
                   <label htmlFor="image">Imagem</label>
                   <input type="file" name="image" id="image" onChange={newImg} required />
+
+                  <p className="error">{error}</p>
                 </div>
     
                 <div className="descriptions">

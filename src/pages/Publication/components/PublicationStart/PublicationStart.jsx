@@ -89,9 +89,11 @@ export function PublicationStart(){
         <div className='options'>
           {
             login && <>
-              <div>
-                <Link to='create-publication/'>Adicionar Publicação</Link>
-              </div>
+              <Link to='create-publication/'>
+                <div>
+                  Adicionar Publicação
+                </div>
+              </Link>
             </>
           }
  

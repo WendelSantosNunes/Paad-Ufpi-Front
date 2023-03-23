@@ -33,11 +33,11 @@ export const MemberContainer = styled.section`
 
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
 
       @media (max-width: 67.5rem){ 
         grid-template-columns: 1fr 1fr;
         justify-items: center;
-        gap: 20px;
       }
 
       @media (max-width: 46.25rem){ 
@@ -85,9 +85,7 @@ export const MemberContainer = styled.section`
       @media (max-width: 18.25rem){
         height: 23.75rem;
       }
-    }
-
-    
+    } 
   }
 
   button{ 

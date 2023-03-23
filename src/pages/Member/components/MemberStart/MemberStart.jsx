@@ -71,7 +71,7 @@ export function MemberStar(){
         })
       })
 
-      navigate('/member')
+      dataTeacher()
     } catch (error) {
       console.log(error) 
     }
@@ -130,9 +130,11 @@ export function MemberStar(){
         { 
           login && <>
             <div className='options'>
-              <Button>
-                <Link to='create-teacher/'>Adicionar Professor(a)</Link>
-              </Button>
+              <Link to='create-teacher/'>
+                <Button>
+                  Adicionar Professor(a)
+                </Button>
+              </Link>
             </div>
           </>
         }
@@ -181,9 +183,11 @@ export function MemberStar(){
         { 
           login && <>
             <div className='options'>
-              <Button>
-                <Link to='create-student/'>Adicionar Aluno(a)</Link>
-              </Button>
+              <Link to='create-student/'>
+                <Button>
+                  Adicionar Aluno(a)
+                </Button>
+              </Link>
             </div>
           </>
         }

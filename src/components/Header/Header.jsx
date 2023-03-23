@@ -38,7 +38,7 @@ export function Header(){
         
               <input type="checkbox" id="toggler" />
 
-              <label for="toggler">
+              <label htmlFor="toggler">
                 <i className="ri-menu-line" onClick={handleMenuClick}>
                   <img src={imageMenu} alt="menu" />
                 </i>

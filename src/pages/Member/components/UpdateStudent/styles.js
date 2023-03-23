@@ -5,6 +5,12 @@ export const ContainerCreateStudent = styled.section`
 
   border-radius: 15px;
 
+  .error{
+    /* text-align: center; */
+
+    color: red;
+  }
+
   > div{
     margin: 3rem auto;  
     

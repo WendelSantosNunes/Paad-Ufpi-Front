@@ -11,6 +11,7 @@ export function UpdateNews() {
   const [value, setValue] = useState('')
   const [image, setImage] = useState('')
   const [title, setTitle] = useState('')
+  const [error, setError] = useState('')
 
   const [loading, setLoading] = useState(false)
   const params = new URLSearchParams(window.location.search)
@@ -52,19 +53,20 @@ export function UpdateNews() {
     const file = target.files[0]
 
     if (!file) {
-      console.log("Nenhum arquivo selecionado")
+      setError("Nenhum arquivo selecionado")
       return
     }
   
     if (file.size >  1024 * 1024 * 5) {
-      console.log("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
+      setError("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
       return
     }
   
     if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-      console.log("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
+      setError("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
       return
     }
+    setError('')
   
     setImage(file)
   }
@@ -81,14 +83,17 @@ export function UpdateNews() {
 
       const token = window.localStorage.getItem('Token')
 
-      await axios.patch('https://api-paadupfi.onrender.com/news/' + key, formData, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        }
-      })
+      if(error === ''){
+        await axios.patch('https://api-paadupfi.onrender.com/news/' + key, formData, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          }
+        })
 
+        setLoading(false)
+        navigate('/news')
+      }
       setLoading(false)
-      navigate('/news')
     } catch (error) {
       setLoading(false)
       console.log(error)
@@ -118,6 +123,7 @@ export function UpdateNews() {
                 <div className="images">
                   <label htmlFor="image">Imagem</label>
                   <input type="file" name="image" id="image"  onChange={newImg} title="Mudar imagem?" />
+                  <p className="error">{error}</p>
                 </div>
 
                 <div className="descriptions">

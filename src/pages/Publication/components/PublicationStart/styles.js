@@ -37,7 +37,12 @@ export const PublicationContainer = styled.section`
 
     margin-bottom: 5.125rem;
 
+    a{
+        color: #eee;
+    }
+
     div{
+      text-align: center;
       background-color: #393E46;
       padding: 1rem;
 
@@ -45,9 +50,7 @@ export const PublicationContainer = styled.section`
 
       border-radius: 15px;
       cursor: pointer;
-      a{
-        color: #eee;
-      }
+     
 
       :hover{
         background-color: var(--button-hover)

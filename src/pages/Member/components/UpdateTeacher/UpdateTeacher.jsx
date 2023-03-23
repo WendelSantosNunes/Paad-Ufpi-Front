@@ -16,6 +16,7 @@ export function UpdateTeacher() {
   const [haveImage, setHaveImage] = useState(0)
   const [students, setStudent] = useState([])
   const [teacher, setTeacher] = useState()
+  const [error, setError] = useState('')
   const navigate = useNavigate()
 
   const params = new URLSearchParams(window.location.search)
@@ -26,8 +27,6 @@ export function UpdateTeacher() {
 
     event.preventDefault()
     
-    console.log(fullName, image, selectedCourses, email)
-
     const formData = new FormData()
 
     const token = window.localStorage.getItem('Token')
@@ -39,28 +38,30 @@ export function UpdateTeacher() {
     formData.append('students', students)
 
     try {
-      if(haveImage == 1){
-        await axios.patch('https://api-paadupfi.onrender.com/teacher/' + key, formData, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          }
-        })
-      }else{
-        await axios.patch('https://api-paadupfi.onrender.com/teacher/update/' + key, {
-          course: selectedCourses,
-          email: email,
-          image: image,
-          fullName: fullName,
-          students: students 
-        }, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          }
-        })
+      if(error === ''){
+        if(haveImage == 1){
+          await axios.patch('https://api-paadupfi.onrender.com/teacher/' + key, formData, {
+            headers: {
+              Authorization: 'Bearer ' + token,
+            }
+          })
+        }else{
+          await axios.patch('https://api-paadupfi.onrender.com/teacher/update/' + key, {
+            course: selectedCourses,
+            email: email,
+            image: image,
+            fullName: fullName,
+            students: students 
+          }, {
+            headers: {
+              Authorization: 'Bearer ' + token,
+            }
+          })
+        }
+        setLoading(false)
+        navigate('/member')
       }
-
       setLoading(false)
-      navigate('/member')
     }catch(error){
       console.log(error)
       setLoading(false)
@@ -76,19 +77,20 @@ export function UpdateTeacher() {
     const file = target.files[0]
 
     if (!file) {
-      console.log("Nenhum arquivo selecionado")
+      setError("Nenhum arquivo selecionado")
       return
     }
   
     if (file.size >  1024 * 1024 * 5) {
-      console.log("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
+      setError("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
       return
     }
   
     if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-      console.log("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
+      setError("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
       return
     }
+    setError('')
   
     setImage(file)
     setHaveImage(1)
@@ -142,6 +144,8 @@ export function UpdateTeacher() {
                 <div className="images">
                   <label htmlFor="image">Imagem</label>
                   <input type="file" name="image" id="image" onChange={handleImage} />
+
+                  <p className="error">{error}</p>
                 </div>
     
                 <div className="forms">

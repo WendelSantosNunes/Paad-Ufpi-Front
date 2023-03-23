@@ -13,7 +13,8 @@ export function CreateTeacher() {
   const [fullName, setFullName] = useState('')
   const [image, setImage] = useState('')
   const [email, setEmail] = useState('')
- 
+  const [error, setError] = useState(false)
+
   const navigate = useNavigate()
 
   async function handleSubmit(event){
@@ -31,7 +32,7 @@ export function CreateTeacher() {
     formData.append('fullName', fullName)
     
 
-    if(fullName != '' && image != '' && selectedCourses != '' && email != ''){
+    if(fullName != '' && image != '' && selectedCourses != '' && email != '' && error === ''){
       try {
         await axios.post('https://api-paadupfi.onrender.com/teacher/', formData, {
           headers: {
@@ -47,6 +48,7 @@ export function CreateTeacher() {
         setLoading(false)
       }
     }
+    setLoading(false)
   }
 
   function handleFullName({target}){
@@ -58,19 +60,20 @@ export function CreateTeacher() {
     const file = target.files[0]
 
     if (!file) {
-      console.log("Nenhum arquivo selecionado")
+      setError("Nenhum arquivo selecionado")
       return
     }
   
     if (file.size >  1024 * 1024 * 5) {
-      console.log("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
+      setError("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
       return
     }
   
     if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-      console.log("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
+      setError("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
       return
     }
+    setError('')
   
     setImage(file)
   }
@@ -103,6 +106,8 @@ export function CreateTeacher() {
                 <div className="images">
                   <label htmlFor="image">Imagem</label>
                   <input type="file" name="image" id="image" onChange={handleImage} required />
+
+                  <p className="error">{error}</p>
                 </div>
 
                 <div className="forms">

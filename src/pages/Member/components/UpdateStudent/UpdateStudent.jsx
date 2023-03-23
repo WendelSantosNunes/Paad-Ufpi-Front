@@ -18,6 +18,7 @@ export function UpdateStudent(){
   const [email, setEmail] = useState('')
   const navigate = useNavigate()
   const [studentGet, setStudentGet] = useState([])
+  const [error, setError] = useState('')
 
   const params = new URLSearchParams(window.location.search)
   const key = params.get('key')
@@ -31,19 +32,20 @@ export function UpdateStudent(){
     const file = target.files[0]
 
     if (!file) {
-      console.log("Nenhum arquivo selecionado")
+      setError("Nenhum arquivo selecionado")
       return
     }
   
     if (file.size >  1024 * 1024 * 5) {
-      console.log("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
+      setError("O arquivo selecionado é muito grande (tamanho máximo de 5 MB)")
       return
     }
   
     if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
-      console.log("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
+      setError("Tipo de arquivo inválido (somente imagens JPEG, PNG e GIF são permitidas)")
       return
     }
+    setError('')
   
     setImage(file)
     setHaveImage(1)
@@ -92,7 +94,7 @@ export function UpdateStudent(){
     
     event.preventDefault()
 
-    if(fullName != '' && image != '' && selectedCourses != '' && selectedTeacher != '' && email != '' ){
+    if(fullName != '' && image != '' && selectedCourses != '' && selectedTeacher != '' && email != '' && error === ''){
       const formData = new FormData()
 
       const token = window.localStorage.getItem('Token')
@@ -147,9 +149,8 @@ export function UpdateStudent(){
         console.log(error)
         setLoading(false)
       }
-
-      setLoading(false)
     }
+    setLoading(false)
   }
 
   return(   
@@ -172,6 +173,8 @@ export function UpdateStudent(){
                 <div className="images">
                   <label htmlFor="image">Imagem</label>
                     <input type="file" name="image" id="image" onChange={handleImage} />
+
+                    <p className="error">{error}</p>
                 </div>
 
                 <div className="forms">

@@ -50,7 +50,6 @@ export const PublicationContainer = styled.section`
 
       border-radius: 15px;
       cursor: pointer;
-     
 
       :hover{
         background-color: var(--button-hover)

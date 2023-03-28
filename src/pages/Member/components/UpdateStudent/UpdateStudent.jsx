@@ -142,7 +142,6 @@ export function UpdateStudent(){
           }
         })
 
-        console.log(response1)
         setLoading(false)
         navigate('/member')
       }catch(error){

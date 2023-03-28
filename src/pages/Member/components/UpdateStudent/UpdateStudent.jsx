@@ -120,7 +120,7 @@ export function UpdateStudent(){
             }
           })
         }else{
-           await axios.patch('https://api-paadupfi.onrender.com/update/' + key, {
+           await axios.patch('https://api-paadupfi.onrender.com/student/update/' + key, {
             course: selectedCourses,
             email: email,
             image: image,

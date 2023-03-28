@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const HomeContainer = styled.div`
+  flex-grow: 1;
+  min-height: 31.25rem;
 
   .swiper-container{
     margin-top: 3.125rem;

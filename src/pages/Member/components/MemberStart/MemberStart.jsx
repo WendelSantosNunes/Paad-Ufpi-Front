@@ -72,6 +72,7 @@ export function MemberStar(){
       })
 
       dataTeacher()
+      dataStudent()
     } catch (error) {
       console.log(error) 
     }
